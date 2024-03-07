@@ -1,24 +1,40 @@
 import axios from "axios";
+import Card from "../components/Card"
+
 
 axios.get("http://localhost:8000/api/products")
     .then((response) => {
-        //console.log(response.data)
-        ListProduct(response.data) 
+        getProductData(response.data) 
     })
     .catch(error => {
     console.log(error);
     });
 
+    let productData = [];    
 
-const ListProduct = (data) => {
 
-    console.log(data)
-    //console.log("data")
+const getProductData = (data) => {
+    for(let i = 0; i < data.length; i++) {
+        productData.push(
+            <>
+                <Card title={data[i].name} imgsrc="HYDROMEL-MOELLEUX-NATURE.jpg"/>
+            </>
+        )
+        console.log(data[i].name)
+    }
+
+    }
+
+const ListProduct = () => {
+
 
 
     return (
       <div className="body">
-        <h1>Contact Me</h1>;
+        <div className="CardContainer">
+            {productData}
+
+        </div>
       </div>
       )
     };  
