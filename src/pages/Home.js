@@ -1,8 +1,12 @@
 import Card from "../components/Card"
+import ListProduct from "../components/ListProduct";
 
 const Home = () => {
     return (
       <div className="body">
+
+        <ListProduct />
+
         <div className="CardContainer">
           <Card title="Hydromel" imgsrc="HYDROMEL-MOELLEUX-NATURE.jpg"/>
           <Card title="Miel" imgsrc="mielgen.jpg"/>
