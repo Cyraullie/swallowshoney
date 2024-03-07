@@ -4,13 +4,8 @@ const Home = () => {
     return (
       <div className="body">
         <div className="CardContainer">
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
+          <Card title="Hydromel" imgsrc="HYDROMEL-MOELLEUX-NATURE.jpg"/>
+          <Card title="Miel" imgsrc="mielgen.jpg"/>
 
         </div>
         

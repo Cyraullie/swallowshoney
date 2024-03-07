@@ -1,3 +1,12 @@
+:root {
+  --black: #0D0D0D;
+  --amber: #BF491F;
+  --caramel: #D97925;
+  --orange: #F29E38;
+  --miel: #F2CB57;
+}
+
+
 .App {
   text-align: center;
 
@@ -13,27 +22,70 @@
   margin-right: auto;
 }
 
+.CardTitle {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--black)
+}
+
 .CardImage {
   height: 180px;
   width: 180px;
-  background-color: wheat;
   margin: auto;
   margin-top: 10px;
 }
 
-.CardName {
-  height: 20px;
+.CardImage > img {
+  height: 180px;
   width: 180px;
-  background-color: aqua;
+  border-radius: 10px;
+}
+
+.CardButtons {
+  height: 60px;
+  width: 180px;
   margin: auto;
   margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.CardDetailsButton, .CardBuyButton {
+  background-color: var(--amber);
+  color: white;
+  font-weight: bold;
+  width: 89px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.CardDetailsButton {
+  border-radius: 15px 0 0  15px;
+}
+
+.CardBuyButton {
+  border-radius: 0 15px 15px 0;
+}
+
+.CardName {
+  height: 60px;
+  width: 180px;
+  margin: auto;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .CardArea {
   height: 350px;
   width: 200px;
-  background-color: #282c34;
+  background-color: var(--miel);
   margin-top: 20px;
+  border-radius: 10px;
 }
 
 .body {
