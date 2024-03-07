@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\GroupProduct;
+use App\Models\GroupProduct;
 
 class GroupProductController extends Controller
 {
