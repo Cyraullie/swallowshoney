@@ -20,6 +20,7 @@
   width: 90%;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 20px;
 }
 
 .CardDiscount {
@@ -48,10 +49,10 @@
 }
 
 .CardName {
-  height: 30px;
+  height: 40px;
   width: 180px;
   margin: auto;
-  margin-top: 5px;
+  margin-top: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -90,7 +91,6 @@
   background-color: var(--amber);
   color: white;
   font-weight: bold;
-  width: 89px;
   height: 60px;
   display: flex;
   align-items: center;
@@ -100,18 +100,19 @@
 .CardNumberButton {
   border-radius: 15px 0 0  15px;
   border: #0D0D0D;
-  width: 65px;
+  width: 40px;
   height: 58px;
   padding-left: 15px;
   padding-right: 10px;
 }
 
 .CardBuyButton {
+  width: 114px;
   border-radius: 0 15px 15px 0;
 }
 
 .CardArea {
-  height: 375px;
+  height: 390px;
   width: 200px;
   background-color: var(--miel);
   margin-top: 20px;
@@ -120,7 +121,7 @@
 }
 
 .body {
-  max-height: 90vh;
+  max-height: 89.7vh;
   overflow-y: scroll;
 }
 
