@@ -7,6 +7,12 @@ import './App.css';
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
+//TODO faire la feuille de contact (formulaire)
+//TODO faire la page de A propos pour parler de l'entreprise
+//TODO faire un compte (historique de commande)
+//TODO faire une login register rester connecter !!!
+//TODO Faire un panier 
+
 export default function App() {
   return (
     <div className="App">
