@@ -1,44 +1,59 @@
+import React, { Component} from 'react';
 import axios from "axios";
 import Card from "../components/Card"
 
 
-axios.get("http://localhost:8000/api/products")
-    .then((response) => {
-        getProductData(response.data) 
-    })
-    .catch(error => {
-    console.log(error);
-    });
+export default class ListProduct extends Component {
+    constructor(props) {
+        super(props);
+        
+        this.state = { productDataState: [] }
+      }
 
-    let productData = [];    
+    getData = () => {
+            axios.get("http://localhost:8000/api/products")
+            .then((response) => {
+                
+                this.getProductData(response.data) 
 
-
-const getProductData = (data) => {
-    for(let i = 0; i < data.length; i++) {
-        productData.push(
-            <>
-                <Card title={data[i].name} imgsrc="HYDROMEL-MOELLEUX-NATURE.jpg"/>
-            </>
-        )
-        console.log(data[i].name)
-    }
-
-    }
-
-const ListProduct = () => {
-
-
-
-    return (
-      <div className="body">
-        <div className="CardContainer">
-            {productData}
-
-        </div>
-      </div>
-      )
-    };  
-export default ListProduct;
-  
+            })
+            .catch(error => {
+            console.log(error);
+            });
+      }
     
+
+    getProductData(data){
+        let productData = []; 
+        for(let i = 0; i < data.length; i++) {
+            productData.push(
+                <>
+                    <Card title={data[i].name} imgsrc={data[i].imgsrc} discount={data[i].discount} description={data[i].description} productId={data[i].id} price={data[i].price}/>
+                </>
+            )
+        }
+
+        this.setState({
+            productDataState: productData,
+        })
+    
+    }
+           
+    componentDidMount() {
+        this.getData()
+      }
+    
+    render() {
+        return (
+            <div className="body">
+                <div className="CardContainer">
+                    {this.state.productDataState}
+                </div>
+            </div>
+        )
+    }
+          
+}
+
+   
 

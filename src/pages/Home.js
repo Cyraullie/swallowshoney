@@ -1,4 +1,3 @@
-import Card from "../components/Card"
 import ListProduct from "../components/ListProduct";
 
 const Home = () => {
@@ -6,12 +5,6 @@ const Home = () => {
       <div className="body">
 
         <ListProduct />
-
-        <div className="CardContainer">
-          <Card title="Hydromel" imgsrc="HYDROMEL-MOELLEUX-NATURE.jpg"/>
-          <Card title="Miel" imgsrc="mielgen.jpg"/>
-
-        </div>
         
         <h1>Home</h1>
         
