@@ -4,7 +4,7 @@ import Basket from "./Basket";
 
 const Header = () => {
 
-  const [isDisplayed, setIsDisplayed] = useState(true);
+  const [isDisplayed, setIsDisplayed] = useState(false);
 
 function handleClick() {
   setIsDisplayed(!isDisplayed);
