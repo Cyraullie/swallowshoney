@@ -34,7 +34,7 @@ const Header = () => {
         <Link className="link" to="contact">Contact</Link>
         <Link className="link" to="account">Compte</Link>
         <div className="BasketContainer" ref={basketRef}>
-          <img className="icon" onClick={handleClick} src="/assets/backet.png"></img>
+          <img className="icon" onClick={handleClick} src="/assets/backet.png" alt='icon_panier'></img>
           <div style={{visibility: isDisplayed ? "visible" : "hidden"}}><Basket /></div>
         </div>
       </nav>

@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home.js";
 import Contact from "./pages/Contact";
 import NoPage from "./pages/NoPage";
+import Order from "./pages/Order.js";
 import './App.css';
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -22,6 +23,7 @@ export default function App() {
             <Route index element={<Home />} />
             <Route path="product" element={<Home />} />
             <Route path="contact" element={<Contact />} />
+            <Route path="order" element={<Order />} />
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>

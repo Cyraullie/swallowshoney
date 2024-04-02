@@ -1,4 +1,5 @@
 import BasketArticles from "./BasketArticles";
+import { Link } from "react-router-dom";
 
 
 const Basket = () => {
@@ -27,7 +28,8 @@ const Basket = () => {
             <a>Sous-Total : {totalPrice} CHF</a>
         </div>
         <div className="BasketBuy">
-            <a className="BasketBuyButton">Passer à la commande</a>
+          
+            <Link className="BasketBuyButton" to="order">Passer à la commande</Link>
         </div>
         
     </div>

@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
   
 
 const BasketArticles = ({ basketContent }) => {
-  
-  console.log(basketContent)
   const [basketDataState, setBasketDataState] = useState([]);
 
     useEffect(() => {
