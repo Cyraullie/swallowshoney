@@ -7,34 +7,14 @@ import axios from "axios";
 
 function Card(data) {
   const [inputValue, setInputValue] = useState(1);
-/*
-const basketContentTest = [
-  { id: 1, name: "miel", quantity: 5, price: 15.50 },
-  { id: 2, name: "hydromel", quantity: 20, price: 25.00 },
-  { id: 2, name: "hydromel", quantity: 20, price: 25.00 },
-  { id: 2, name: "hydromel", quantity: 20, price: 25.00 },
-  { id: 2, name: "hydromel", quantity: 20, price: 25.00 },
-  { id: 2, name: "hydromel", quantity: 20, price: 25.00 },
-  { id: 2, name: "hydromel", quantity: 20, price: 25.00 },
-  { id: 2, name: "hydromel", quantity: 20, price: 25.00 },
-  { id: 2, name: "hydromel", quantity: 20, price: 25.00 },
-  { id: 2, name: "hydromel", quantity: 20, price: 25.00 },
-  { id: 2, name: "hydromel", quantity: 20, price: 25.00 },
-  { id: 2, name: "hydromel", quantity: 20, price: 25.00 },
-  { id: 3, name: "hydromel piquant", quantity: 30, price: 30.00}
-];
 
-localStorage.setItem('basketContent', JSON.stringify(basketContentTest));
-  
-*/
+  const changeQuantity = (event) => {
 
-const changeQuantity = (event) => {
+    setInputValue(event.target.valueAsNumber);
+  }
 
-  setInputValue(event.target.valueAsNumber);
-}
-
-const handleClick = (productId) => {
-  
+  const handleClick = (productId) => {
+    
     axios.get("http://localhost:8000/api/product/"+productId)
     .then((response) => {
       let basketContent = JSON.parse(localStorage.getItem('basketContent'));
@@ -44,7 +24,7 @@ const handleClick = (productId) => {
     .catch(error => {
     console.log(error);
     });
-}
+  }
 
     return (
       <div className="CardArea">
@@ -59,7 +39,7 @@ const handleClick = (productId) => {
           <div className="CardButtons">
             
             <input className="CardNumberButton" onChange={changeQuantity} type="number" min={1} defaultValue={1}></input>
-            <a className="CardBuyButton" onClick={() => handleClick(data.productId)}>Acheter {data.productId}</a>
+            <a className="CardBuyButton" onClick={() => handleClick(data.productId)}>Acheter</a>
           </div>
           
       </div>
