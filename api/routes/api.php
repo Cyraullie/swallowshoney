@@ -15,3 +15,4 @@ use App\Http\Controllers\ProductController;
 */
 
 Route::get("/products", [ProductController::class, "show_all"]);
+Route::get("/product/{id}", [ProductController::class, "show"]);

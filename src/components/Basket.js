@@ -1,25 +1,18 @@
 import BasketArticles from "./BasketArticles";
 
 
-  
-
-
-
 const Basket = () => {
-  const basketContent = JSON.parse(localStorage.getItem('basketContent'));
+
+  let basketContent = JSON.parse(localStorage.getItem('basketContent'));
   let priceArray = []
   for(let i = 0; i < basketContent.length; i++) {
     priceArray.push(basketContent[i].price * basketContent[i].quantity)
   }
   let totalPrice = 0;
 
-  
-
   for(let i = 0; i < priceArray.length; i++) {
     totalPrice += priceArray[i]
   }
-
-
 
   return (
     <>
@@ -27,7 +20,7 @@ const Basket = () => {
         <div className="BasketTitle">
             <a>Panier</a>
         </div>
-        <BasketArticles/>
+        <BasketArticles basketContent={basketContent}/>
 
         
         <div className="BasketTotalPrice">
