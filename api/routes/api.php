@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OrderController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -16,3 +17,4 @@ use App\Http\Controllers\ProductController;
 
 Route::get("/products", [ProductController::class, "show_all"]);
 Route::get("/product/{id}", [ProductController::class, "show"]);
+Route::post("/order", [OrderController::class, "store"]);
