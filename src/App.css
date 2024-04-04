@@ -199,6 +199,11 @@
   text-decoration: none; 
 }
 
+#NoBasketContent {
+  display: block;
+  margin-top: 50%;
+}
+
 .OrderArticles {
   padding-top: 50px;
   padding-bottom: 50px;

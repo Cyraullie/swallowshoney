@@ -6,14 +6,18 @@ const Basket = () => {
 
   let basketContent = JSON.parse(localStorage.getItem('basketContent'));
   let priceArray = []
-  for(let i = 0; i < basketContent.length; i++) {
-    priceArray.push(basketContent[i].price * basketContent[i].quantity)
-  }
   let totalPrice = 0;
+
+  if(basketContent != null){
+    for(let i = 0; i < basketContent.length; i++) {
+      priceArray.push(basketContent[i].price * basketContent[i].quantity)
+    }
 
   for(let i = 0; i < priceArray.length; i++) {
     totalPrice += priceArray[i]
   }
+  
+} 
 
   return (
     <>
@@ -21,7 +25,12 @@ const Basket = () => {
         <div className="BasketTitle">
             <a>Panier</a>
         </div>
-        <BasketArticles basketContent={basketContent}/>
+
+        {basketContent != null ? (
+          <BasketArticles basketContent={basketContent}/>
+        ) : (
+          <div className="BasketArticles"><a id="NoBasketContent">Aucun contenu de panier disponible</a></div>
+        )}
 
         
         <div className="BasketTotalPrice">

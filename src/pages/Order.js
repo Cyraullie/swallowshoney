@@ -17,40 +17,23 @@ const Order = () => {
   }
 
   function orderClick() {
-    console.log("bite")
-/*
-    let {name, link} = this.state;
-    let payload = {name, link, level_id: this.props.route.params.params.id_level};
 
-    const onSuccess = () => {
-      this.props.navigation.reset({
-        index: 0,
-        routes: [{ name: 'Elements',
-        params: {
-          id_level: this.props.route.params.params.id_level,
-          id_groupElement: this.props.route.params.params.id_groupElement,
-          name_level: this.props.route.params.params.name_level,
-          name_groupElement: this.props.route.params.params.name_groupElement,
-        } }],
-      })
-    };
+    let payload = {users_id: localStorage.getItem("users_id"), basketContent: basketContent, totalPrice: totalPrice}
 
-    const onFailure = (error) => {
-      console.log(error && error.response);
-      
-    };
-    axios.post(BASE_URL + "newElement", payload ).then(onSuccess).catch(onFailure)
-    axios.get("http://localhost:8000/api/products")
+
+    axios.post("http://localhost:8000/api/order", payload)
             .then((response) => {
                 
-                this.getProductData(response.data) 
+                console.log(response.data)
+                localStorage.removeItem("basketContent")
+                navigate('/')
 
             })
             .catch(error => {
             console.log(error);
             });
-            */
-            navigate('/')
+
+           
   }
 
     return (

@@ -1,7 +1,4 @@
-//TODO faire le redirection vers la page des details d'un produit
-//TODO faire l'ajout au panier d'un produit
-
-//<a className="CardDetailsButton" href={"/details/" + data.productId}>Détails {data.productId}</a>
+//TODO faire en sorte que quand on ajout un produit qui est deja dans le panier il s'additionne plutot que de rajouter une ligne
 import React, { Component, useState } from 'react';
 import axios from "axios";
 
@@ -17,8 +14,13 @@ function Card(data) {
     
     axios.get("http://localhost:8000/api/product/"+productId)
     .then((response) => {
+
       let basketContent = JSON.parse(localStorage.getItem('basketContent'));
-      basketContent.push({id: response.data.id, name: response.data.name, quantity: inputValue, price: response.data.price });
+      if(basketContent != null){
+        basketContent.push({id: response.data.id, name: response.data.name, quantity: inputValue, price: response.data.price });
+      }else {
+        basketContent = [{id: response.data.id, name: response.data.name, quantity: inputValue, price: response.data.price }]
+      }
       localStorage.setItem('basketContent', JSON.stringify(basketContent));
     })
     .catch(error => {
