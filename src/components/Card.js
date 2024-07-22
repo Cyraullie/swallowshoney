@@ -16,7 +16,7 @@ function Card(data) {
     } else if (quantity > 0) {
       return <span>Stock faible</span>;
     } else {
-      return <span>Rupture de stock</span>;
+      return <span>Rupture de stock - fabrication en cours</span>;
     }
   }
 
@@ -52,7 +52,7 @@ function Card(data) {
           <div className='CardQuantity'>{renderQuantityText(data.quantity)}</div>
           <div className="CardButtons">
             
-            <input className="CardNumberButton" onChange={changeQuantity} type="number" min={1} defaultValue={1} max={data.quantity}></input>
+            <input className="CardNumberButton" onChange={changeQuantity} type="number" min={1} defaultValue={1}></input>
             <a className="CardBuyButton" onClick={() => handleClick(data.productId)}>Acheter</a>
           </div>
           
