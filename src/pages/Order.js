@@ -24,8 +24,8 @@ const Order = () => {
     axios.post("http://localhost:8000/api/order", payload)
             .then((response) => {
                 
-                console.log(response.data)
-                localStorage.removeItem("basketContent")
+                //console.log(response.data)
+                //localStorage.removeItem("basketContent")
                 navigate('/')
 
             })

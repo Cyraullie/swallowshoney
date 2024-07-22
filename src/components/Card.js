@@ -1,11 +1,13 @@
-//TODO ajouter une bannière pour dire que le produit a bien été ajouté au panier
+//TODO fix style
 import React, { useContext, useState } from 'react';
 import axios from "axios";
 import { BannerContext } from './BannerContext';
+import { BasketContext } from './BasketContext';
 
 function Card(data) {
 	const [inputValue, setInputValue] = useState(1);
 	const { setShowBanner, setMessage, setType } = useContext(BannerContext);
+	const { addToBasket } = useContext(BasketContext);
 
 	const changeQuantity = (event) => {
 		setInputValue(event.target.valueAsNumber);
@@ -25,29 +27,12 @@ function Card(data) {
   const handleClick = (productId) => {
     
     axios.get("http://localhost:8000/api/product/"+productId)
-    .then((response) => {
-
-      let basketContent = JSON.parse(localStorage.getItem('basketContent'));
-      let find = false;
-
-      if(basketContent != null){
-        for(let i = 0; i < basketContent.length; i++) {
-          if (response.data.id == basketContent[i].id)
-          {
-            basketContent[i].quantity += inputValue;
-            find = true;
-            break;
-          }
-        }
-        if (!find)
-          basketContent.push({id: response.data.id, name: response.data.name, quantity: inputValue, price: response.data.price });
-      }else {
-        basketContent = [{id: response.data.id, name: response.data.name, quantity: inputValue, price: response.data.price }]
-      }
-      localStorage.setItem('basketContent', JSON.stringify(basketContent));
-	  setShowBanner(true);
-	  setMessage("Produit ajouté au panier avec succès !");
-	  setType("success");
+    .then((response) => {    
+    	const product = {id: response.data.id, name: response.data.name, quantity: inputValue, price: response.data.price }
+		addToBasket(product);
+		setShowBanner(true);
+		setMessage("Produit ajouté au panier avec succès !");
+		setType("success");
     })
     .catch(error => {
 		console.log(error);

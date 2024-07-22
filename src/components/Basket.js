@@ -1,22 +1,24 @@
 import BasketArticles from "./BasketArticles";
 import { Link } from "react-router-dom";
-
+//TODO il faut pouvoir changer la quantité ou la supprimer du panier
 
 const Basket = () => {
 
   let basketContent = JSON.parse(localStorage.getItem('basketContent'));
   let priceArray = []
   let totalPrice = 0;
+  let totalQuantity = 0;
 
   if(basketContent != null){
     for(let i = 0; i < basketContent.length; i++) {
       priceArray.push(basketContent[i].price * basketContent[i].quantity)
+      totalQuantity += basketContent[i].quantity;
     }
 
   for(let i = 0; i < priceArray.length; i++) {
     totalPrice += priceArray[i]
   }
-  
+  //console.log(totalQuantity)
 } 
 
   return (

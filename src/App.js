@@ -10,6 +10,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { BannerProvider } from './components/BannerContext';
 import Banner from './components/Banner';
+import { BasketProvider } from './components/BasketContext';
 
 //TODO faire la feuille de contact (formulaire)
 //TODO faire la page de A propos pour parler de l'entreprise
@@ -19,6 +20,7 @@ import Banner from './components/Banner';
 
 export default function App() {
 	return (
+		<BasketProvider>
 		<BannerProvider>
 		<div className="App">
 			<Banner />
@@ -35,12 +37,9 @@ export default function App() {
 			</BrowserRouter>
 		</div>
 		</BannerProvider>
+		</BasketProvider>
 	);
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<App />);
-
-
-
-
