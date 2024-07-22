@@ -57,6 +57,8 @@ CREATE TABLE IF NOT EXISTS `SwallowsHoneyDB`.`products` (
   `price` DECIMAL(10,2) NOT NULL,
   `discount` INT NULL,
   `group_products_id` INT NOT NULL,
+  `imgsrc` VARCHAR(255) NOT NULL,
+  `actual_quantity` INT NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   INDEX `fk_products_group_products_idx` (`group_products_id` ASC) VISIBLE,
@@ -72,7 +74,7 @@ ENGINE = InnoDB;
 -- Table `SwallowsHoneyDB`.`orders`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `SwallowsHoneyDB`.`orders` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `total_price` DECIMAL(10,2) NOT NULL,
   `users_id` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -92,9 +94,12 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `SwallowsHoneyDB`.`orders_has_products` (
   `orders_id` INT NOT NULL,
   `products_id` INT NOT NULL,
-  PRIMARY KEY (`orders_id`, `products_id`),
+  `quantity` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`),
   INDEX `fk_orders_has_products_products1_idx` (`products_id` ASC) VISIBLE,
   INDEX `fk_orders_has_products_orders1_idx` (`orders_id` ASC) VISIBLE,
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   CONSTRAINT `fk_orders_has_products_orders1`
     FOREIGN KEY (`orders_id`)
     REFERENCES `SwallowsHoneyDB`.`orders` (`id`)

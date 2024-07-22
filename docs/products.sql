@@ -3,6 +3,7 @@
 LIMIT 0, 50000
 
 -- Date: 2024-04-04 11:09
+`actual_quantity`
 */
 INSERT INTO `products` (`id`,`name`,`description`,`price`,`discount`,`group_products_id`,`imgsrc`) VALUES (1,'miel','miel originaire du corcelles',15.50,10,1,'mielgen.jpg');
 INSERT INTO `products` (`id`,`name`,`description`,`price`,`discount`,`group_products_id`,`imgsrc`) VALUES (2,'hydormel','produit dérivé du miel',25.00,0,2,'HYDROMEL-MOELLEUX-NATURE.jpg');
