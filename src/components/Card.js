@@ -10,6 +10,17 @@ function Card(data) {
     setInputValue(event.target.valueAsNumber);
   }
 
+  const renderQuantityText = (quantity) => {
+    if (quantity > 5) {
+      return <span>En stock</span>;
+    } else if (quantity > 0) {
+      return <span>Stock faible</span>;
+    } else {
+      return <span>Rupture de stock</span>;
+    }
+  }
+
+
   const handleClick = (productId) => {
     
     axios.get("http://localhost:8000/api/product/"+productId)
@@ -38,9 +49,10 @@ function Card(data) {
           <div className="CardName"><a className="CardTitle">{data.title}</a></div>
           <div className='CardDescription'><a>{data.description}</a></div>
           <div className='CardPrice'>{data.price} CHF/unité</div>
+          <div className='CardQuantity'>{renderQuantityText(data.quantity)}</div>
           <div className="CardButtons">
             
-            <input className="CardNumberButton" onChange={changeQuantity} type="number" min={1} defaultValue={1}></input>
+            <input className="CardNumberButton" onChange={changeQuantity} type="number" min={1} defaultValue={1} max={data.quantity}></input>
             <a className="CardBuyButton" onClick={() => handleClick(data.productId)}>Acheter</a>
           </div>
           

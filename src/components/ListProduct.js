@@ -28,7 +28,7 @@ export default class ListProduct extends Component {
         for(let i = 0; i < data.length; i++) {
             productData.push(
                 <>
-                    <Card title={data[i].name} imgsrc={data[i].imgsrc} discount={data[i].discount} description={data[i].description} productId={data[i].id} price={data[i].price}/>
+                    <Card title={data[i].name} imgsrc={data[i].imgsrc} discount={data[i].discount} description={data[i].description} productId={data[i].id} price={data[i].price} quantity={data[i].actual_quantity}/>
                 </>
             )
         }
