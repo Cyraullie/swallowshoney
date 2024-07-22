@@ -12,3 +12,4 @@ INSERT INTO `products` (`id`,`name`,`description`,`price`,`discount`,`group_prod
 INSERT INTO `products` (`id`,`name`,`description`,`price`,`discount`,`group_products_id`,`imgsrc`) VALUES (5,'hydromel à la framboise','dfd',30.00,0,2,'HYDROMEL-MOELLEUX-NATURE.jpg');
 INSERT INTO `products` (`id`,`name`,`description`,`price`,`discount`,`group_products_id`,`imgsrc`) VALUES (6,'hydromel à la pèche','gdg',30.00,0,2,'HYDROMEL-MOELLEUX-NATURE.jpg');
 INSERT INTO `products` (`id`,`name`,`description`,`price`,`discount`,`group_products_id`,`imgsrc`) VALUES (7,'hydromel à la fraise','d',30.00,0,2,'HYDROMEL-MOELLEUX-NATURE.jpg');
+INSERT INTO `products` (`id`,`name`,`description`,`price`,`discount`,`group_products_id`,`imgsrc`) VALUES (8,'bougie goût bite','d',14.00,0,3,'bougie.avif');
