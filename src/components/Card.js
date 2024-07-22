@@ -1,17 +1,18 @@
-//TODO faire en sorte que quand on ajout un produit qui est deja dans le panier il s'additionne plutot que de rajouter une ligne
-import React, { Component, useState } from 'react';
+//TODO ajouter une bannière pour dire que le produit a bien été ajouté au panier
+import React, { useContext, useState } from 'react';
 import axios from "axios";
+import { BannerContext } from './BannerContext';
 
 function Card(data) {
-  const [inputValue, setInputValue] = useState(1);
+	const [inputValue, setInputValue] = useState(1);
+	const { setShowBanner, setMessage, setType } = useContext(BannerContext);
 
-  const changeQuantity = (event) => {
+	const changeQuantity = (event) => {
+		setInputValue(event.target.valueAsNumber);
+	}
 
-    setInputValue(event.target.valueAsNumber);
-  }
-
-  const renderQuantityText = (quantity) => {
-    if (quantity > 5) {
+	const renderQuantityText = (quantity) => {
+	if (quantity > 5) {
       return <span>En stock</span>;
     } else if (quantity > 0) {
       return <span>Stock faible</span>;
@@ -27,16 +28,36 @@ function Card(data) {
     .then((response) => {
 
       let basketContent = JSON.parse(localStorage.getItem('basketContent'));
+      let find = false;
+
       if(basketContent != null){
-        basketContent.push({id: response.data.id, name: response.data.name, quantity: inputValue, price: response.data.price });
+        for(let i = 0; i < basketContent.length; i++) {
+          if (response.data.id == basketContent[i].id)
+          {
+            basketContent[i].quantity += inputValue;
+            find = true;
+            break;
+          }
+        }
+        if (!find)
+          basketContent.push({id: response.data.id, name: response.data.name, quantity: inputValue, price: response.data.price });
       }else {
         basketContent = [{id: response.data.id, name: response.data.name, quantity: inputValue, price: response.data.price }]
       }
       localStorage.setItem('basketContent', JSON.stringify(basketContent));
+	  setShowBanner(true);
+	  setMessage("Produit ajouté au panier avec succès !");
+	  setType("success");
     })
     .catch(error => {
-    console.log(error);
-    });
+		console.log(error);
+		setShowBanner(true);
+		setMessage("Une erreur c'est produite !");
+		setType("error");
+	});
+	setTimeout(() => {
+		setShowBanner(false);
+	  }, 3000);
   }
 
     return (

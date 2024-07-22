@@ -1,3 +1,4 @@
+import React from 'react';
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home.js";
@@ -7,6 +8,8 @@ import Order from "./pages/Order.js";
 import './App.css';
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import { BannerProvider } from './components/BannerContext';
+import Banner from './components/Banner';
 
 //TODO faire la feuille de contact (formulaire)
 //TODO faire la page de A propos pour parler de l'entreprise
@@ -15,21 +18,24 @@ import Footer from "./components/Footer";
 //TODO Faire un panier 
 
 export default function App() {
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Header />}>
-            <Route index element={<Home />} />
-            <Route path="product" element={<Home />} />
-            <Route path="contact" element={<Contact />} />
-            <Route path="order" element={<Order />} />
-            <Route path="*" element={<NoPage />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </div>
-  );
+	return (
+		<BannerProvider>
+		<div className="App">
+			<Banner />
+			<BrowserRouter>
+				<Routes>
+					<Route path="/" element={<Header />}>
+						<Route index element={<Home />} />
+						<Route path="product" element={<Home />} />
+						<Route path="contact" element={<Contact />} />
+						<Route path="order" element={<Order />} />
+						<Route path="*" element={<NoPage />} />
+					</Route>
+				</Routes>
+			</BrowserRouter>
+		</div>
+		</BannerProvider>
+	);
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
