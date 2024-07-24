@@ -3,12 +3,10 @@ import React, { createContext, useState, useEffect } from 'react';
 export const BasketContext = createContext();
 
 export const BasketProvider = ({ children }) => {
-  const [basketContent, setBasketContent] = useState([]);
-
-  useEffect(() => {
-    const storedBasketContent = JSON.parse(localStorage.getItem('basketContent')) || [];
-    setBasketContent(storedBasketContent);
-  }, []);
+  const [basketContent, setBasketContent] = useState(() => {
+    const storedBasketContent = localStorage.getItem('basketContent');
+    return storedBasketContent ? JSON.parse(storedBasketContent) : [];
+  });
 
   useEffect(() => {
     localStorage.setItem('basketContent', JSON.stringify(basketContent));

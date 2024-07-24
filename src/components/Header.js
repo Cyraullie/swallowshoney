@@ -5,7 +5,7 @@ import Basket from "./Basket";
 
 const Header = () => {
   const { basketContent } = useContext(BasketContext);
-  const [isDisplayed, setIsDisplayed] = useState(true);
+  const [isDisplayed, setIsDisplayed] = useState(false);
   const basketRef = useRef(null);
 
   useEffect(() => {
