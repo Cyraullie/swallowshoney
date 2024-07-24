@@ -1,24 +1,41 @@
+import React, { useContext, useEffect, useState } from 'react';
 import OrderArcticles from "../components/OrderArcticles";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import { BasketContext } from '../components/BasketContext';
 
 const Order = () => {
+  const { basketContent } = useContext(BasketContext);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalQuantity, setTotalQuantity] = useState(0);
   const navigate = useNavigate();
 
-  let basketContent = JSON.parse(localStorage.getItem('basketContent'));
-  let priceArray = []
-  for(let i = 0; i < basketContent.length; i++) {
-    priceArray.push(basketContent[i].price * basketContent[i].quantity)
-  }
-  let totalPrice = 0;
+  useEffect(() => {
+    const calculateTotal = () => {
+      let priceArray = [];
+      let totalPrice = 0;
+      let totalQuantity = 0;
 
-  for(let i = 0; i < priceArray.length; i++) {
-    totalPrice += priceArray[i]
-  }
+      if (basketContent != null) {
+        for (let i = 0; i < basketContent.length; i++) {
+          priceArray.push(basketContent[i].price * basketContent[i].quantity);
+          totalQuantity += basketContent[i].quantity;
+        }
+
+        for (let i = 0; i < priceArray.length; i++) {
+          totalPrice += priceArray[i];
+        }
+      }
+      setTotalPrice(totalPrice);
+      setTotalQuantity(totalQuantity);
+    };
+
+    calculateTotal();
+  }, [basketContent]);
 
   function orderClick() {
 
-    let payload = {users_id: localStorage.getItem("users_id"), basketContent: basketContent, totalPrice: totalPrice}
+    /*let payload = {users_id: localStorage.getItem("users_id"), basketContent: basketContent, totalPrice: totalPrice}
 
 
     axios.post("http://localhost:8000/api/order", payload)
@@ -32,8 +49,7 @@ const Order = () => {
             .catch(error => {
             console.log(error);
             });
-
-           
+           */
   }
 
     return (
@@ -47,7 +63,7 @@ const Order = () => {
 
                     
             <div className="OrderTotalPrice">
-                <a>Sous-Total : {totalPrice} CHF</a>
+                <a>Sous-Total : {totalPrice.toFixed(2)} CHF</a>
             </div>
             
             <div className="OrderDetail">
