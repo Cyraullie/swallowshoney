@@ -187,6 +187,14 @@
   overflow-y: scroll;
 }
 
+.BasketNumberButton {
+  border: #0D0D0D;
+  width: 40px;
+  height: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
 .BasketBuyButton {
   height: 50px;
   cursor: pointer;
@@ -198,6 +206,12 @@
   justify-content: center;
   border-radius: 0 0 10px 10px;
   text-decoration: none; 
+}
+
+.HandleBasket {
+  width: 110px;
+  display: flex;
+  justify-content: space-between;
 }
 
 #NoBasketContent {
