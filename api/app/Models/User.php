@@ -2,11 +2,37 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Hash;
 
-class User extends Model
+class User extends Authenticatable
 {
+    use HasFactory, Notifiable;
+    
+    public $timestamps = false;
+
     protected $fillable = [
-        'firstname', 'lastname', 'password', 'email', 'phone', 'city', 'address', 'isdifferentbillingadress', 'billing_city', 'billing_address'
+        'firstname',
+        'lastname',
+        'email',
+        'password',
+        'phone',
+        'city',
+        'address',
+        'isdifferentbillingadress',
+        'billing_city',
+        'billing_address',
+    ];
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    protected $casts = [
+        'isdifferentbillingadress' => 'boolean',
     ];
 }
