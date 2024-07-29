@@ -127,7 +127,6 @@ const Register = ({ login }) => {
             return;
         }
 
-        //TODO Ajouter la logique pour l'envoi des données ici
         const payload = { gender, firstname, lastname, email, password, city, npa: npa, address, country, phone };
         axios.post("http://localhost:8000/api/register", payload)
             .then(response => {
@@ -142,47 +141,51 @@ const Register = ({ login }) => {
 
     return  (
         <div className="body">
-            <div>
-                <select name="gender" value={gender} style={{ borderColor: formErrors.gender ? 'red' : 'black' }} className='LoginInput' onChange={handleChange}>
-                    <option value="" disabled>Genre</option>
-                    <option value="male">Homme</option>
-                    <option value="female">Femme</option>
-                    <option value="non-binary">Non-binaire</option>
-                    <option value="prefer-not-to-say">Préférer ne pas dire</option>
-                    <option value="other">Autre</option>
-                </select>
-                <input type='text' name='firstname' style={{ borderColor: formErrors.firstname ? 'red' : 'black' }} className='LoginInput' value={firstname} placeholder='Prénom' onChange={handleChange} />
-                <input type='text' name='lastname' style={{ borderColor: formErrors.lastname ? 'red' : 'black' }} className='LoginInput' value={lastname} placeholder='Nom' onChange={handleChange} />
-                <input type='password' name='password' className='LoginInput' value={password} onChange={handleChange} placeholder='Mot de passe'/>
-                {formErrors.password && <p style={{ color: 'red' }}>Le mot de passe ne respecte pas les critères de sécurité.</p>}
-                <input type='password' name='confirmPassword' className='LoginInput' value={confirmPassword} onChange={handleChange} placeholder='Répéter le mot de passe'/>
-                {!samePwd && <p style={{ color: 'red' }}>Les mots de passe ne sont pas identiques</p>}
-                {password && (
-                    <div>
-                        {!passwordErrors.length && <p style={{ color: 'red' }}>Le mot de passe doit contenir au moins 8 caractères.</p>}
-                        {!passwordErrors.uppercase && <p style={{ color: 'red' }}>Le mot de passe doit contenir une lettre majuscule.</p>}
-                        {!passwordErrors.lowercase && <p style={{ color: 'red' }}>Le mot de passe doit contenir une lettre minuscule.</p>}
-                        {!passwordErrors.number && <p style={{ color: 'red' }}>Le mot de passe doit contenir un chiffre.</p>}
-                        {!passwordErrors.special && <p style={{ color: 'red' }}>Le mot de passe doit contenir un caractère spécial.</p>}
-                    </div>
-                )}
-            </div>
-            <div>
-                <input type='email' name='email' style={{ borderColor: formErrors.email ? 'red' : 'black' }} className='LoginInput' value={email} placeholder='Adresse e-mail' onChange={handleChange} />
-                <input type='tel' name='phone' style={{ borderColor: formErrors.phone ? 'red' : 'black' }} className='LoginInput' value={phone} placeholder='Numéro de téléphone' onChange={handleChange} />
-            </div>
-            <div>
-                <input type='text' name='address' style={{ borderColor: formErrors.address ? 'red' : 'black' }} className='LoginInput' value={address} placeholder='Adresse' onChange={handleChange} />
-                <input type='text' name='npa' className='LoginInput' style={{ borderColor: formErrors.npa ? 'red' : 'black' }} value={npa} placeholder='NPA' onChange={handleChange} />
-                <input type='text' name='city' style={{ borderColor: formErrors.city ? 'red' : 'black' }} className='LoginInput' value={city} placeholder='Ville' onChange={handleChange} />
-                <select name='country' style={{ borderColor: formErrors.country ? 'red' : 'black' }} value={country} className='LoginInput' onChange={handleChange}>
-                    <option value="" disabled>Pays</option>
-                    <option value="Suisse">Suisse</option>
-                    <option value="France">France</option>
-                </select>
-            </div>
-            <a onClick={handleClick} className='LoginButton'>S'inscrire</a>
-        </div>
+        	<div className="RegisterArea">
+				<h1>Formulaire d'inscription</h1>
+				<div className='RegisterPersonal'>
+					<select name="gender" value={gender} style={{ borderColor: formErrors.gender ? 'red' : 'black' }} className='LoginInput' onChange={handleChange}>
+						<option value="" disabled>Genre</option>
+						<option value="male">Homme</option>
+						<option value="female">Femme</option>
+						<option value="non-binary">Non-binaire</option>
+						<option value="prefer-not-to-say">Préférer ne pas dire</option>
+						<option value="other">Autre</option>
+					</select>
+					<input type='text' name='firstname' style={{ borderColor: formErrors.firstname ? 'red' : 'black' }} className='LoginInput' value={firstname} placeholder='Prénom' onChange={handleChange} />
+					<input type='text' name='lastname' style={{ borderColor: formErrors.lastname ? 'red' : 'black' }} className='LoginInput' value={lastname} placeholder='Nom' onChange={handleChange} />
+					<input type='email' name='email' style={{ borderColor: formErrors.email ? 'red' : 'black' }} className='LoginInput' value={email} placeholder='Adresse e-mail' onChange={handleChange} />
+					<input type='tel' name='phone' style={{ borderColor: formErrors.phone ? 'red' : 'black' }} className='LoginInput' value={phone} placeholder='Numéro de téléphone' onChange={handleChange} />
+				</div>
+				<div className='RegisterPassword'>
+					<input type='password' style={{ borderColor: formErrors.password ? 'red' : 'black' }} name='password' className='LoginInput' value={password} onChange={handleChange} placeholder='Mot de passe'/>
+					<input type='password' style={{ borderColor: formErrors.confirmPassword ? 'red' : 'black' }} name='confirmPassword' className='LoginInput' value={confirmPassword} onChange={handleChange} placeholder='Répéter le mot de passe'/>
+					<div className='RegisterPwdRule'>
+						{!samePwd && <p style={{ color: 'red' }}>Les mots de passe ne sont pas identiques</p>}
+						{password && (
+							<div>
+								{!passwordErrors.length && <p style={{ color: 'red' }}>Le mot de passe doit contenir au moins 8 caractères.</p>}
+								{!passwordErrors.uppercase && <p style={{ color: 'red' }}>Le mot de passe doit contenir une lettre majuscule.</p>}
+								{!passwordErrors.lowercase && <p style={{ color: 'red' }}>Le mot de passe doit contenir une lettre minuscule.</p>}
+								{!passwordErrors.number && <p style={{ color: 'red' }}>Le mot de passe doit contenir un chiffre.</p>}
+								{!passwordErrors.special && <p style={{ color: 'red' }}>Le mot de passe doit contenir un caractère spécial.</p>}
+							</div>
+						)}
+					</div>
+				</div>
+				<div className='RegisterAddress'>
+					<input type='text' name='address' style={{ borderColor: formErrors.address ? 'red' : 'black' }} className='LoginInput' value={address} placeholder='Adresse' onChange={handleChange} />
+					<input type='text' name='npa' className='LoginInput' style={{ borderColor: formErrors.npa ? 'red' : 'black' }} value={npa} placeholder='NPA' onChange={handleChange} />
+					<input type='text' name='city' style={{ borderColor: formErrors.city ? 'red' : 'black' }} className='LoginInput' value={city} placeholder='Ville' onChange={handleChange} />
+					<select name='country' style={{ borderColor: formErrors.country ? 'red' : 'black' }} value={country} className='LoginInput' onChange={handleChange}>
+						<option value="" disabled>Pays</option>
+						<option value="Suisse">Suisse</option>
+						<option value="France">France</option>
+					</select>
+				</div>
+				<a onClick={handleClick} className='RegisterButton'>S'inscrire</a>
+			</div>
+		</div>
 	);
 };
 

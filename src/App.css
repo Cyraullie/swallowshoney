@@ -384,8 +384,62 @@
   background-color: #6192fb;
 }
 
+.RegisterArea {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
 
+.RegisterPersonal > select {
+  width: 49%;
+  margin-right: 100px;
+}
 
+.RegisterPersonal > input {
+  width: 48%;
+}
+
+.RegisterAddress > input {
+  width: 48%;
+}
+
+.RegisterAddress > select {
+  width: 49%;
+}
+
+.RegisterPassword > input {
+  width: 48%;
+}
+
+.RegisterPwdRule {
+  width: 100%;
+}
+
+.RegisterPersonal, .RegisterPassword, .RegisterAddress {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 25px;
+}
+
+.RegisterButton {
+  width: 70%;
+  margin-top: 20px;
+  font-weight: bold;
+  color: white;  
+  font-size: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #6192fb;
+}
 
 .App-logo {
   height: 65px;
