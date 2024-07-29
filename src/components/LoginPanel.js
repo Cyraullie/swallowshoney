@@ -26,8 +26,7 @@ const Login = ({ close, login }) => {
 	const updatePwd = (event) => {
 		setPassword(event.target.value)
 	}
-//TODO faire la partie mot de passe oublié
-//TODO ajouter un service de mail depuis docker ?
+	
 	return (
 	<>
 		<div className="HideArea"/>

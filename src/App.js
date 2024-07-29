@@ -17,7 +17,6 @@ import { BasketProvider } from './components/BasketContext';
 //TODO faire la feuille de contact (formulaire)
 //TODO faire la page de A propos pour parler de l'entreprise
 //TODO faire un compte (historique de commande)
-//TODO faire une login register rester connecter !!!
 
 export default function App() {
 	const [isLoged, setIsLoged] = useState(false);
