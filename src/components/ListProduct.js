@@ -45,10 +45,8 @@ export default class ListProduct extends Component {
     
     render() {
         return (
-            <div className="body">
-                <div className="CardContainer">
-                    {this.state.productDataState}
-                </div>
+            <div className="CardContainer">
+                {this.state.productDataState}
             </div>
         )
     }

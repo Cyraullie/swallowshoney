@@ -88,7 +88,7 @@ const Recover = () => {
     }, [password]);
 
     const handleClickPassword = () => {
-        if (samePwd)
+        if (samePwd && (passwordErrors.length && passwordErrors.uppercase && passwordErrors.lowercase && passwordErrors.number && passwordErrors.special))
         {
             const payload = { password, user_id };
             axios.post("http://localhost:8000/api/change_password", payload)
