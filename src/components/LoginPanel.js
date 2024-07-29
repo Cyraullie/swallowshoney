@@ -8,10 +8,6 @@ const Login = ({ close, login }) => {
 
 	const handleClick = () => {
 		const payload = { email: email, password: password };
-
-		console.log("login");
-		console.log(email);
-		console.log(password);
 		axios.post("http://localhost:8000/api/login", payload)
 		.then((response) => {
 			localStorage.setItem("user_id", response.data.user.id);
@@ -33,10 +29,11 @@ const Login = ({ close, login }) => {
 
 	return (
 	<>
+		<div className="HideArea"/>
 		<div className="LoginArea">
 			<div className="LoginTitle">
 				<a className='Login'>Se connecter</a>
-				<Link onClick={close} className="Register" to="register">S'incrire</Link>
+				<Link onClick={close} login={login} className="Register" to="register">S'incrire</Link>
 				<a className='CloseButton' onClick={close}>X</a>
 			</div>
             <div className='LoginData'>

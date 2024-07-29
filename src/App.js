@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home.js";
+import Register from "./pages/Register.js";
 import Contact from "./pages/Contact";
 import NoPage from "./pages/NoPage";
 import Order from "./pages/Order.js";
@@ -18,6 +19,8 @@ import { BasketProvider } from './components/BasketContext';
 //TODO faire une login register rester connecter !!!
 
 export default function App() {
+	const [isLoged, setIsLoged] = useState(false);
+
 	return (
 		<BasketProvider>
 		<BannerProvider>
@@ -25,12 +28,13 @@ export default function App() {
 			<Banner />
 			<BrowserRouter>
 				<Routes>
-					<Route path="/" element={<Header />}>
+					<Route path="/" element={<Header setIsLoged={setIsLoged} isLoged={isLoged} />}>
 						<Route index element={<Home />} />
 						<Route path="product" element={<Home />} />
 						<Route path="contact" element={<Contact />} />
 						<Route path="order" element={<Order />} />
 						<Route path="*" element={<NoPage />} />
+						<Route path="register" element={<Register login={setIsLoged}/>} />
 					</Route>
 				</Routes>
 			</BrowserRouter>

@@ -23,29 +23,40 @@ class UserController extends Controller
             'billing_city' => 'nullable|string|max:255',
             'billing_address' => 'nullable|string|max:255',
         ]);*/
-
+        /*return response()->json([
+            'message' => 'test',
+            'user' => [
+                'gender' => $request->gender,
+                'firstname' => $request->firstname,
+                'lastname' => $request->lastname,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'phone' => $request->phone,
+                'city' => $request->city,
+                'npa' => $request->npa,
+                'country' => $request->country,
+                'address' => $request->address,
+            ],
+        ]);*/
         $user = User::create([
+            'gender' => $request->input('gender'),
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'phone' => $request->phone,
             'city' => $request->city,
+            'npa' => $request->npa,
+            'country' => $request->country,
             'address' => $request->address,
-            'isdifferentbillingadress' => $request->isdifferentbillingadress,
-            'billing_city' => $request->billing_city,
-            'billing_address' => $request->billing_address,
         ]);
 
         // Authentifie l'utilisateur après l'enregistrement
-        Auth::login($user);
+        //Auth::login($user);
 
         return response()->json([
             'message' => 'User registered successfully',
-            'user' => [
-                'id' => $user->id,
-                'email' => $user->email,
-            ],
+            'user' => $user,
         ]);
     }
 

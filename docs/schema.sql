@@ -29,6 +29,9 @@ CREATE TABLE IF NOT EXISTS `SwallowsHoneyDB`.`users` (
   `isdifferentbillingadress` TINYINT NOT NULL DEFAULT 0,
   `billing_city` VARCHAR(255) NULL,
   `billing_address` VARCHAR(255) NULL,
+  `gender` VARCHAR(255) NOT NULL,
+  `npa` VARCHAR(255) NOT NULL,
+  `country` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)

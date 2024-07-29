@@ -4,11 +4,10 @@ import { BasketContext } from './BasketContext';
 import Basket from "./Basket";
 import Login from "./LoginPanel";
 
-const Header = () => {
+const Header = ({ setIsLoged, isLoged }) => {
   const { basketContent } = useContext(BasketContext);
   const [isDisplayed, setIsDisplayed] = useState(false);
   const [isDisplayedLogin, setIsDisplayedLogin] = useState(false);
-  const [isLoged, setIsLoged] = useState(false);
   const basketRef = useRef(null);
 
   useEffect(() => {

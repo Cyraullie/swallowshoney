@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
-import OrderArticles from "../components/OrderArcticles"; // Assurez-vous que le nom du fichier est correct
+import OrderArticles from "../components/OrderArcticles";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { BasketContext } from '../components/BasketContext';
-
+//TODO verifier si le user_id existe sinon 
+//TODO faire un système de facture et plus de payement
 const Order = () => {
   const navigate = useNavigate();
   const { basketContent, clearBasket } = useContext(BasketContext);
@@ -23,7 +24,8 @@ const Order = () => {
   }, [basketContent]);
 
   const orderClick = () => {
-    const payload = { users_id: 1, basketContent: basketContent, totalPrice: totalPrice };
+    let user_id = localStorage.getItem("user_id");
+    const payload = { users_id: user_id, basketContent: basketContent, totalPrice: totalPrice };
 
     axios.post("http://localhost:8000/api/order", payload)
       .then((response) => {

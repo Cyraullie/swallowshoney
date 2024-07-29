@@ -15,13 +15,16 @@ class User extends Authenticatable
     public $timestamps = false;
 
     protected $fillable = [
+        'gender',
         'firstname',
         'lastname',
         'email',
         'password',
         'phone',
         'city',
+        'npa',
         'address',
+        'country',
         'isdifferentbillingadress',
         'billing_city',
         'billing_address',
