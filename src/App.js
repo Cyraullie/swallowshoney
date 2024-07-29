@@ -6,6 +6,7 @@ import Register from "./pages/Register.js";
 import Contact from "./pages/Contact";
 import NoPage from "./pages/NoPage";
 import Order from "./pages/Order.js";
+import Recover from "./pages/Recover.js";
 import './App.css';
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -35,6 +36,7 @@ export default function App() {
 						<Route path="order" element={<Order />} />
 						<Route path="*" element={<NoPage />} />
 						<Route path="register" element={<Register login={setIsLoged}/>} />
+						<Route path="ForgotPwd" element={<Recover />} />
 					</Route>
 				</Routes>
 			</BrowserRouter>
