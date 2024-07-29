@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\EmailController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -25,3 +26,5 @@ Route::post('/user', [UserController::class, 'data']);
 Route::get("/products", [ProductController::class, "show_all"]);
 Route::get("/product/{id}", [ProductController::class, "show"]);
 Route::post("/order", [OrderController::class, "store"]);
+
+Route::post("/recover", [EmailController::class, "recoverPassword"]);
