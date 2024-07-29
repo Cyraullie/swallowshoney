@@ -12,14 +12,8 @@ const Header = () => {
   const basketRef = useRef(null);
 
   useEffect(() => {
-    let user = localStorage.getItem("user");
-    if (user != null)
-    {
-      if (user.id != null && user.email != null)
-        setIsLoged(true);
-      else
-        localStorage.removeItem("user");
-    }
+    login();
+    
     function handleClickOutside(event) {
       if (basketRef.current && !basketRef.current.contains(event.target)) {
         setIsDisplayed(false);
@@ -32,12 +26,29 @@ const Header = () => {
     };
   }, []);
 
+  function login() {
+    let user_id = localStorage.getItem("user_id");
+
+    if (user_id != null)
+      setIsLoged(true);
+    else
+    {
+      setIsLoged(false);
+      localStorage.removeItem("user_id");
+    }
+  }
+
   function handleClick() {
     setIsDisplayed(!isDisplayed);
   }
 
   function handleClickLogin() {
     setIsDisplayedLogin(!isDisplayedLogin);
+  }
+
+  function handleClickUnlog() {
+    localStorage.removeItem("user_id")
+    login()
   }
 
   const totalQuantity = basketContent.reduce((acc, item) => acc + item.quantity, 0);
@@ -51,7 +62,9 @@ const Header = () => {
           <Link className="link" to="/"><img src="/assets/logo.png" className="App-logo" alt="logo" /></Link>
           <Link className="link" to="contact">Contact</Link>
           {isLoged ? (
-            <Link className="link" to="account">Compte</Link>
+            <div>
+              <Link className="link" to="account">Compte</Link>/<a className="link" onClick={handleClickUnlog}>Se déconnecter</a>
+            </div>
           ) : (
             <a className="link" onClick={handleClickLogin}>Se connecter</a>
           )}
@@ -62,7 +75,7 @@ const Header = () => {
           </div>
           <div style={{visibility: isDisplayedLogin ? "visible" : "hidden"}}>
             <div className="HideArea"/>
-            <Login close={handleClickLogin}/>
+            <Login close={handleClickLogin} login={login}/>
           </div>    
         </nav>
       </div>

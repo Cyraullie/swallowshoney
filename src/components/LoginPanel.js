@@ -1,10 +1,34 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
-const Login = ({ close }) => {
+const Login = ({ close, login }) => {
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
 
 	const handleClick = () => {
+		const payload = { email: email, password: password };
+
 		console.log("login");
+		console.log(email);
+		console.log(password);
+		axios.post("http://localhost:8000/api/login", payload)
+		.then((response) => {
+			localStorage.setItem("user_id", response.data.user.id);
+			login();
+			close();
+		})
+		.catch(error => {
+			console.log(error);
+		}); 
+	}
+
+	const updateEmail = (event) => {
+		setEmail(event.target.value)
+	}
+
+	const updatePwd = (event) => {
+		setPassword(event.target.value)
 	}
 
 	return (
@@ -16,8 +40,12 @@ const Login = ({ close }) => {
 				<a className='CloseButton' onClick={close}>X</a>
 			</div>
             <div className='LoginData'>
-				<input className='LoginInput' type='email' placeholder='Adresse e-mail'/>
-				<input className='LoginInput' type='password' placeholder='Mot de passe'/>
+				<input 
+                	onChange={(event) => updateEmail(event)} 
+					className='LoginInput' type='email' placeholder='Adresse e-mail'/>
+				<input
+                	onChange={(event) => updatePwd(event)} 
+					className='LoginInput' type='password' placeholder='Mot de passe'/>
 				<Link className='ForgotPwd'>Mot de passe oublié ?</Link>
 				<a onClick={handleClick} className='LoginButton'>Se connecter</a>
 			</div>

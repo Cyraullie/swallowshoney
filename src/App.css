@@ -406,6 +406,7 @@
   text-decoration: none;
   color: black;
   display: inline-block;
+  cursor: pointer;
 }
 
 Link {
