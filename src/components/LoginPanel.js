@@ -44,7 +44,7 @@ const Login = ({ close, login }) => {
 				<input
                 	onChange={(event) => updatePwd(event)} 
 					className='LoginInput' type='password' placeholder='Mot de passe'/>
-				<Link onClick={handleClick}  className='ForgotPwd' to="ForgotPwd">Mot de passe oublié ?</Link>
+				<Link onClick={close}  className='ForgotPwd' to="ForgotPwd">Mot de passe oublié ?</Link>
 				<a onClick={handleClick} className='LoginButton'>Se connecter</a>
 			</div>
 			

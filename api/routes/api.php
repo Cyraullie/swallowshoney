@@ -22,6 +22,8 @@ Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/logout', [UserController::class, 'logout']);
 Route::post('/user', [UserController::class, 'data']);
+Route::post('/check_code', [UserController::class, 'check_code']);
+Route::post('/change_password', [UserController::class, 'change_password']);
 
 Route::get("/products", [ProductController::class, "show_all"]);
 Route::get("/product/{id}", [ProductController::class, "show"]);

@@ -97,5 +97,43 @@ class UserController extends Controller
                 'message' => 'User not found'
             ], 404);
         }
+    }   
+    
+    public function check_code(Request $request)
+    {
+        if ($request->code == $request->getCode) {
+            $user = User::where('email', $request->email)->first();
+            if ($user) {
+                return response()->json([
+                    'message' => 'User found',
+                    'user_id' => $user->id
+                ], 200);
+            } else {
+                return response()->json([
+                    'message' => 'User not found'
+                ], 404);
+            }
+        }
+        else {
+            return response()->json([
+                'message' => 'Code incorrect'
+            ], 404);
+        }
+    }
+
+    public function change_password(Request $request)
+    {
+        $user = User::find($request->user_id);
+        if ($user) {
+            $user->password = Hash::make($request->password);
+            $user->save();
+            return response()->json([
+                'message' => 'Mot de passe changé',
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'User not found'
+            ], 404);
+        }
     }
 }
