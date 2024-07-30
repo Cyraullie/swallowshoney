@@ -7,6 +7,7 @@ import Contact from "./pages/Contact";
 import NoPage from "./pages/NoPage";
 import Order from "./pages/Order.js";
 import Recover from "./pages/Recover.js";
+import Account from "./pages/Account.js";
 import './App.css';
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -20,6 +21,7 @@ import { BasketProvider } from './components/BasketContext';
 
 export default function App() {
 	const [isLoged, setIsLoged] = useState(false);
+	const [isDisplayedLogin, setIsDisplayedLogin] = useState(false);
 
 	return (
 		<BasketProvider>
@@ -28,14 +30,15 @@ export default function App() {
 			<Banner />
 			<BrowserRouter>
 				<Routes>
-					<Route path="/" element={<Header setIsLoged={setIsLoged} isLoged={isLoged} />}>
+					<Route path="/" element={<Header setIsLoged={setIsLoged} isLoged={isLoged} isDisplayedLogin={isDisplayedLogin} setIsDisplayedLogin={setIsDisplayedLogin} />}>
 						<Route index element={<Home />} />
 						<Route path="product" element={<Home />} />
 						<Route path="contact" element={<Contact />} />
-						<Route path="order" element={<Order />} />
+						<Route path="order" element={<Order setIsDisplayedLogin={setIsDisplayedLogin}/>} />
 						<Route path="*" element={<NoPage />} />
 						<Route path="register" element={<Register login={setIsLoged}/>} />
 						<Route path="ForgotPwd" element={<Recover />} />
+						<Route path="account" element={<Account />} />
 					</Route>
 				</Routes>
 			</BrowserRouter>

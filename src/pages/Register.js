@@ -2,11 +2,12 @@ import React, { useState, useEffect, useContext } from 'react';
 import { BannerContext } from '../components/BannerContext';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
-
+//TODO avoir une adresse par defaut au non
 const Register = ({ login }) => {
 	const navigate = useNavigate();
 	const { setShowBanner, setMessage, setType } = useContext(BannerContext);
     const [gender, setSelectedGender] = useState('');
+    const [typeClient, setTypeClient] = useState('');
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
     const [email, setEmail] = useState('');
@@ -35,6 +36,7 @@ const Register = ({ login }) => {
         address: false,
         npa: false,
         country: false,
+        typeClient: false,
         password: false,
         confirmPassword: false
     });
@@ -93,6 +95,9 @@ const Register = ({ login }) => {
             case 'confirmPassword':
                 setConfirmPassword(value);
                 break;
+            case 'type':
+                setTypeClient(value);
+                break;
             default:
                 break;
         }
@@ -109,6 +114,7 @@ const Register = ({ login }) => {
             address: !address,
             npa: !npa,
             country: !country,
+            typeClient: !typeClient,
             password: !password,
             confirmPassword: !confirmPassword
         };
@@ -127,7 +133,7 @@ const Register = ({ login }) => {
             return;
         }
 
-        const payload = { gender, firstname, lastname, email, password, city, npa: npa, address, country, phone };
+        const payload = { gender, firstname, lastname, email, password, city, npa: npa, address, country, phone, typeClient };
         axios.post("http://localhost:8000/api/register", payload)
             .then(response => {
 				localStorage.setItem("user_id", response.data.user.id);
@@ -151,6 +157,11 @@ const Register = ({ login }) => {
 						<option value="non-binary">Non-binaire</option>
 						<option value="prefer-not-to-say">Préférer ne pas dire</option>
 						<option value="other">Autre</option>
+					</select>
+                    <select name="type" value={typeClient} style={{ borderColor: formErrors.gender ? 'red' : 'black' }} className='LoginInput' onChange={handleChange}>
+						<option value="" disabled>type de client</option>
+						<option value="1">personne</option>
+						<option value="2">entreprise</option>
 					</select>
 					<input type='text' name='firstname' style={{ borderColor: formErrors.firstname ? 'red' : 'black' }} className='LoginInput' value={firstname} placeholder='Prénom' onChange={handleChange} />
 					<input type='text' name='lastname' style={{ borderColor: formErrors.lastname ? 'red' : 'black' }} className='LoginInput' value={lastname} placeholder='Nom' onChange={handleChange} />

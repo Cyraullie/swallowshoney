@@ -3,9 +3,14 @@ import React, { createContext, useState, useEffect } from 'react';
 export const BasketContext = createContext();
 
 export const BasketProvider = ({ children }) => {
-  const [basketContent, setBasketContent] = useState([]);
+  const [basketContent, setBasketContent] = useState(() => {
+    // Lire le contenu du panier depuis localStorage lors de l'initialisation
+    const savedBasket = localStorage.getItem('basketContent');
+    return savedBasket ? JSON.parse(savedBasket) : [];
+  });
 
   useEffect(() => {
+    // Mettre à jour localStorage chaque fois que basketContent change
     localStorage.setItem('basketContent', JSON.stringify(basketContent));
   }, [basketContent]);
 

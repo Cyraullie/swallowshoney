@@ -5,9 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import { BasketContext } from '../components/BasketContext';
 //TODO verifier si le user_id existe sinon 
 //TODO faire un système de facture et plus de payement
-const Order = () => {
+//TODO ajouter une zone de texte pour s'il y a des messages
+const Order = ({ setIsDisplayedLogin }) => {
   const navigate = useNavigate();
   const { basketContent, clearBasket } = useContext(BasketContext);
+  const [currentDateTime, setCurrentDateTime] = useState(new Date());
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
@@ -25,16 +27,21 @@ const Order = () => {
 
   const orderClick = () => {
     let user_id = localStorage.getItem("user_id");
-    const payload = { users_id: user_id, basketContent: basketContent, totalPrice: totalPrice };
-
-    axios.post("http://localhost:8000/api/order", payload)
-      .then((response) => {
-          clearBasket();
-          navigate('/');
-      })
-      .catch(error => {
-        console.log(error);
-      }); 
+    if (user_id == null)
+      setIsDisplayedLogin(true)
+    else{
+      setCurrentDateTime(new Date());
+      console.log(currentDateTime.toLocaleDateString())
+      const payload = { users_id: user_id, basketContent: basketContent, totalPrice: totalPrice };
+      axios.post("http://localhost:8000/api/order", payload)
+        .then((response) => {
+            clearBasket();
+            navigate('/');
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
   };
 
   return (
