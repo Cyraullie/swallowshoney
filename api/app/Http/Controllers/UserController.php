@@ -89,12 +89,12 @@ class UserController extends Controller
 
     public function data(Request $request)
     {
-        $user = User::find($request->id);
+        $user = User::with(['typeUser', 'addresses', 'orders.products'])->find($request->id);
 
         if ($user) {
             return response()->json([
                 'message' => 'User found',
-                'user' => $user
+                'user' =>  $user,
             ], 200);
         } else {
             return response()->json([

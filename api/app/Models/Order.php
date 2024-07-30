@@ -7,7 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $fillable = [
-        'id', 'total_price', 'users_id',
+        'id',
+        'total_price',
+        'nb_order',
+        'created_date',
+        'addresses_id',
+        'state',
+        'tva',
+        'shipping_cost',
+        'additional_message',
+        'users_id',
+    ];
+
+    protected $hidden = [
+        'users_id',
+        'addresses_id',
     ];
 
     public $timestamps = false;

@@ -9,8 +9,8 @@ import { BasketContext } from '../components/BasketContext';
 const Order = ({ setIsDisplayedLogin }) => {
   const navigate = useNavigate();
   const { basketContent, clearBasket } = useContext(BasketContext);
-  const [currentDateTime, setCurrentDateTime] = useState(new Date());
   const [totalPrice, setTotalPrice] = useState(0);
+  const [addresses_id, setAddresses_id] = useState();
 
   useEffect(() => {
     let priceArray = [];
@@ -25,22 +25,44 @@ const Order = ({ setIsDisplayedLogin }) => {
     setTotalPrice(total);
   }, [basketContent]);
 
+
+  const formatDate = (date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Mois de 0 à 11, donc ajouter 1
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
   const orderClick = () => {
     let user_id = localStorage.getItem("user_id");
     if (user_id == null)
       setIsDisplayedLogin(true)
     else{
-      setCurrentDateTime(new Date());
-      console.log(currentDateTime.toLocaleDateString())
-      const payload = { users_id: user_id, basketContent: basketContent, totalPrice: totalPrice };
-      axios.post("http://localhost:8000/api/order", payload)
+
+      const payload_user = { id: user_id };
+      axios.post("http://localhost:8000/api/user", payload_user)
         .then((response) => {
-            clearBasket();
-            navigate('/');
+          setAddresses_id(response.data.user.addresses[0].id);
+        
+        const date = new Date();
+        console.log(formatDate(date))
+        //, shipping_cost: 0, additional_message: ""
+        const payload = { users_id: user_id, basketContent: basketContent, totalPrice: totalPrice, created_date: formatDate(date), addresses_id: response.data.user.addresses[0].id, tva: 0};
+        
+        console.log(payload)
+        axios.post("http://localhost:8000/api/order", payload)
+          .then((response) => {
+            console.log(response)
+              clearBasket();
+              navigate('/');
+          })
+          .catch(error => {
+            console.log(error);
+          });
         })
-        .catch(error => {
-          console.log(error);
-        });
+      .catch(error => {
+      console.log(error);
+      });
     }
   };
 
