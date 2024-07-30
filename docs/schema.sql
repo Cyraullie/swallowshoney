@@ -15,6 +15,16 @@ CREATE SCHEMA IF NOT EXISTS `SwallowsHoneyDB` DEFAULT CHARACTER SET utf8 ;
 USE `SwallowsHoneyDB` ;
 
 -- -----------------------------------------------------
+-- Table `SwallowsHoneyDB`.`type_users`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `SwallowsHoneyDB`.`type_users` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `SwallowsHoneyDB`.`users`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `SwallowsHoneyDB`.`users` (
@@ -24,17 +34,17 @@ CREATE TABLE IF NOT EXISTS `SwallowsHoneyDB`.`users` (
   `password` VARCHAR(255) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
   `phone` VARCHAR(45) NOT NULL,
-  `city` VARCHAR(255) NOT NULL,
-  `address` VARCHAR(255) NOT NULL,
-  `isdifferentbillingadress` TINYINT NOT NULL DEFAULT 0,
-  `billing_city` VARCHAR(255) NULL,
-  `billing_address` VARCHAR(255) NULL,
   `gender` VARCHAR(255) NOT NULL,
-  `npa` VARCHAR(255) NOT NULL,
-  `country` VARCHAR(255) NOT NULL,
+  `type_users_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
+  INDEX `fk_users_type_users1_idx` (`type_users_id` ASC) VISIBLE,
+  CONSTRAINT `fk_users_type_users1`
+    FOREIGN KEY (`type_users_id`)
+    REFERENCES `SwallowsHoneyDB`.`type_users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -74,18 +84,51 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `SwallowsHoneyDB`.`addresses`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `SwallowsHoneyDB`.`addresses` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `address` VARCHAR(255) NOT NULL,
+  `city` VARCHAR(255) NOT NULL,
+  `npa` VARCHAR(100) NOT NULL,
+  `country` VARCHAR(255) NOT NULL,
+  `users_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_addresses_users1_idx` (`users_id` ASC) VISIBLE,
+  CONSTRAINT `fk_addresses_users1`
+    FOREIGN KEY (`users_id`)
+    REFERENCES `SwallowsHoneyDB`.`users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `SwallowsHoneyDB`.`orders`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `SwallowsHoneyDB`.`orders` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `total_price` DECIMAL(10,2) NOT NULL,
   `users_id` INT NOT NULL,
+  `nb_order` VARCHAR(255) NOT NULL,
+  `created_date` DATE NOT NULL,
+  `addresses_id` INT NOT NULL,
+  `state` ENUM('new', 'open', 'send', 'close') NOT NULL DEFAULT 'new',
+  `tva` DECIMAL(10,2) NOT NULL,
+  `shipping_costs` DECIMAL(10,2) NULL,
+  `additional_message` LONGTEXT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   INDEX `fk_orders_users1_idx` (`users_id` ASC) VISIBLE,
+  INDEX `fk_orders_addresses1_idx` (`addresses_id` ASC) VISIBLE,
   CONSTRAINT `fk_orders_users1`
     FOREIGN KEY (`users_id`)
     REFERENCES `SwallowsHoneyDB`.`users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_orders_addresses1`
+    FOREIGN KEY (`addresses_id`)
+    REFERENCES `SwallowsHoneyDB`.`addresses` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

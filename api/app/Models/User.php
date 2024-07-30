@@ -28,6 +28,7 @@ class User extends Authenticatable
         'isdifferentbillingadress',
         'billing_city',
         'billing_address',
+        'type_users_id',
     ];
 
     protected $hidden = [
@@ -38,4 +39,19 @@ class User extends Authenticatable
     protected $casts = [
         'isdifferentbillingadress' => 'boolean',
     ];
+
+    public function typeUser()
+    {
+        return $this->belongsTo(TypeUser::class, 'type_users_id');
+    }
+
+    public function addresses()
+    {
+        return $this->hasMany(Address::class, 'users_id');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'users_id');
+    }
 }

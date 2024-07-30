@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Address;
+use App\Models\TypeUser;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,10 +33,15 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'phone' => $request->phone,
+            'type_users_id' => intval($request->typeClient),
+        ]);
+
+        $address = Address::create([
             'city' => $request->city,
             'npa' => $request->npa,
             'country' => $request->country,
             'address' => $request->address,
+            'users_id' => $user->id,
         ]);
 
         // Authentifie l'utilisateur après l'enregistrement
@@ -82,10 +89,7 @@ class UserController extends Controller
 
     public function data(Request $request)
     {
-        $id = $request->input('id');
-        $email = $request->input('email');
-
-        $user = User::where('id', $id)->where('email', $email)->first();
+        $user = User::find($request->id);
 
         if ($user) {
             return response()->json([
