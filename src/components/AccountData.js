@@ -2,7 +2,11 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 //import { BannerContext } from './BannerContext';
-
+//TODO list des commandes
+//TODO donnée personnel
+//TODO modification du mot de passe
+//TODO modification de l'adresse
+//TODO modification des donnée personnel
 function AccountData() {
 	const navigate = useNavigate();
 	const [data, setData] = useState([]);
@@ -10,7 +14,6 @@ function AccountData() {
 	const [display, setDisplay] = useState("profile");
 	const [loading, setLoading] = useState(true);
 	//const { setShowBanner, setMessage, setType } = useContext(BannerContext);
-	//TODO mettre un temps de chargement pour avoir les données utilisateurs
 	useEffect(() => {
 		let user_id = localStorage.getItem("user_id");
 		const payload = { id: user_id };
@@ -103,7 +106,7 @@ function AccountData() {
 							<div key={index} className='AccountPersonnalDataArea'>
 							  <a className='AccountDetailButton' onClick={() => handleNavigate(order.id)}>Afficher les détails</a>
 							  <a className='AccountDetailText'>Date de création : {order.created_date}</a>
-							  <a className='AccountDetailText'>Numéro de commande :0 {order.nb_order}</a>
+							  <a className='AccountDetailText'>Numéro de commande : {order.nb_order}</a>
 							  <a className='AccountDetailPrice'>Prix total - CHF {order.total_price}</a>
 							</div>
 						))}
