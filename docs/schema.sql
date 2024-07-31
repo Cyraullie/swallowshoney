@@ -93,6 +93,7 @@ CREATE TABLE IF NOT EXISTS `SwallowsHoneyDB`.`addresses` (
   `npa` VARCHAR(100) NOT NULL,
   `country` VARCHAR(255) NOT NULL,
   `users_id` INT NOT NULL,
+  `default` INT NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   INDEX `fk_addresses_users1_idx` (`users_id` ASC) VISIBLE,
   CONSTRAINT `fk_addresses_users1`

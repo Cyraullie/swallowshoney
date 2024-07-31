@@ -51,6 +51,11 @@ class User extends Authenticatable
         return $this->hasMany(Address::class, 'users_id');
     }
 
+    public function defaultAddress()
+    {
+        return $this->hasOne(Address::class, 'users_id')->where('default', 1);
+    }
+
     public function orders()
     {
         return $this->hasMany(Order::class, 'users_id');
