@@ -28,5 +28,6 @@ Route::post('/change_password', [UserController::class, 'change_password']);
 Route::get("/products", [ProductController::class, "show_all"]);
 Route::get("/product/{id}", [ProductController::class, "show"]);
 Route::post("/order", [OrderController::class, "store"]);
+Route::get("/order/{id}", [OrderController::class, "show"]);
 
 Route::post("/recover", [EmailController::class, "recoverPassword"]);
