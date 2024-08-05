@@ -54,9 +54,12 @@ class OrderController extends Controller
         }
     }
 
-    public function show($id)
+    public function show($id, $user_id)
     {
-        $order = Order::with(['user', 'address', 'products'])->find($id);
+        $order = Order::with(['user', 'address', 'products'])
+        ->where('id', $id)
+        ->where('users_id', $user_id)
+        ->first();
 
         if ($order) {
             return response()->json([
