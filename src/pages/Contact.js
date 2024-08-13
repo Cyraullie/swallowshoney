@@ -6,9 +6,9 @@ const Contact = () => {
 
   return (
     <div className="body">
-      <h1>Contact Me</h1>;
+      <h1>Contact Me</h1>
 
-      <a onClick={connect}>coinnect</a>
+      <a onClick={connect}>hirondellehoney@gmail.com</a>
     </div>
     )
   };  
