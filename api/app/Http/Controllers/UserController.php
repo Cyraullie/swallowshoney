@@ -140,4 +140,34 @@ class UserController extends Controller
             ], 404);
         }
     }
+
+    public function changeandcheck_password(Request $request)
+    {
+        $user = User::find($request->user_id);
+        if ($user) {
+            if (Hash::check($request->oldPwd, $user->password)) {
+                if (Hash::check($request->pwd, $user->password)) {
+                    return response()->json([
+                        'message' => 'Old password and new password are the same'
+                    ], 400);
+                }
+                else {
+                    $user->password = Hash::make($request->pwd);
+                    $user->save();
+                    return response()->json([
+                        'message' => 'Mot de passe changé',
+                    ], 200);
+                }
+            }
+            else {
+                return response()->json([
+                    'message' => 'Old password incorrect'
+                ], 400);
+            }
+        } else {
+            return response()->json([
+                'message' => 'User not found'
+            ], 404);
+        }
+    }
 }

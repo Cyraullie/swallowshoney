@@ -1,16 +1,29 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { BannerContext } from '../components/BannerContext';
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 //import { BannerContext } from './BannerContext';
 //TODO modification du mot de passe
 //TODO modification de l'adresse
 //TODO modification des donnée personnel
 function AccountData() {
 	const navigate = useNavigate();
+	const { setShowBanner, setMessage, setType } = useContext(BannerContext);
 	const [data, setData] = useState([]);
 	const [title, setTitle] = useState("données personnelles");
 	const [display, setDisplay] = useState("profile");
 	const [loading, setLoading] = useState(true);
+	const [oldPwd, setOldPwd] = useState("");
+	const [pwd, setPwd] = useState("");
+	const [confirmPwd, setConfirmPwd] = useState(""); 
+	const [samePwd, setSamePwd] = useState(false);
+    const [passwordErrors, setPasswordErrors] = useState({
+        length: false,
+        uppercase: false,
+        lowercase: false,
+        number: false,
+        special: false
+    });
 	//const { setShowBanner, setMessage, setType } = useContext(BannerContext);
 	useEffect(() => {
 		let user_id = localStorage.getItem("user_id");
@@ -25,6 +38,24 @@ function AccountData() {
 				setLoading(false);
             });
 	}, []);
+
+	useEffect(() => {
+        if (pwd && confirmPwd) {
+            setSamePwd(pwd === confirmPwd);
+        }
+    }, [pwd, confirmPwd]);
+
+    useEffect(() => {
+        if (pwd) {
+            setPasswordErrors({
+                length: pwd.length >= 8,
+                uppercase: /[A-Z]/.test(pwd),
+                lowercase: /[a-z]/.test(pwd),
+                number: /[0-9]/.test(pwd),
+                special: /[!@#$%^&*(),.?":{}|<>]/.test(pwd)
+            });
+        }
+    }, [pwd]);
 
 	const handleClick = (type) => {
 		switch (type) {
@@ -50,6 +81,51 @@ function AccountData() {
 	const handleNavigate = (id) => {
 		navigate(`/order/details`, { state: { id: id } });
 	  };
+
+	const updateOldPwd = (event) => {
+		setOldPwd(event.target.value)
+	}
+	
+	const updatePwd = (event) => {
+		setPwd(event.target.value)
+	}
+
+	const updateConfirmPwd = (event) => {
+		setConfirmPwd(event.target.value)
+	}
+
+	const handleClickPassword = () => {
+		console.log(passwordErrors)
+		console.log(samePwd)
+		if ((passwordErrors.length && passwordErrors.uppercase && passwordErrors.lowercase && passwordErrors.number && passwordErrors.special) && samePwd)
+		{
+			let user_id = localStorage.getItem("user_id");
+			const payload = { user_id, oldPwd, pwd };
+			console.log(payload)
+			axios.post("http://localhost:8000/api/changeandcheck_password", payload)
+			.then((response) => {
+				setShowBanner(true);
+				setMessage("Votre mot de passe a bien été changé");
+				setType("success");
+				setTimeout(() => {
+					setShowBanner(false);
+				}, 3000);
+				setTitle("données personnelles");
+				setDisplay("profile");
+				setPwd("")
+				setConfirmPwd("")
+				setOldPwd("")
+			})
+			.catch(error => {				
+				setShowBanner(true);
+				setMessage(error.response.data.message);
+				setType("error");
+				setTimeout(() => {
+					setShowBanner(false);
+				}, 3000);
+			});
+		}
+	}
 
 	if (loading) {
 		return <div>Loading...</div>;
@@ -109,7 +185,28 @@ function AccountData() {
 							  <a className='AccountDetailText'>Numéro de commande : {order.nb_order}</a>
 							  <a className='AccountDetailPrice'>Prix total - CHF {order.total_price}</a>
 							</div>
-						))}
+					))}
+					{display == "password" && 
+						<div className='AccountPersonnalDataArea'>
+							<input className='LoginInput' type='password' placeholder='Ancien mot de passe' onChange={(event) => updateOldPwd(event)} />
+							<Link className='ForgotPwd' to="ForgotPwd">Mot de passe oublié ?</Link>
+							<input className='LoginInput' type='password' placeholder='Nouveau mot de passe' onChange={(event) => updatePwd(event)} />
+							<input className='LoginInput' type='password' placeholder='Confimer le nouveau mot de passe' onChange={(event) => updateConfirmPwd(event)} />
+							<div className='RegisterPwdRule'>
+								{!samePwd && <p style={{ color: 'red' }}>Les mots de passe ne sont pas identiques</p>}
+								{pwd && (
+									<div>
+										{!passwordErrors.length && <p style={{ color: 'red' }}>Le mot de passe doit contenir au moins 8 caractères.</p>}
+										{!passwordErrors.uppercase && <p style={{ color: 'red' }}>Le mot de passe doit contenir une lettre majuscule.</p>}
+										{!passwordErrors.lowercase && <p style={{ color: 'red' }}>Le mot de passe doit contenir une lettre minuscule.</p>}
+										{!passwordErrors.number && <p style={{ color: 'red' }}>Le mot de passe doit contenir un chiffre.</p>}
+										{!passwordErrors.special && <p style={{ color: 'red' }}>Le mot de passe doit contenir un caractère spécial.</p>}
+									</div>
+								)}
+							</div>
+							<a onClick={handleClickPassword} className='LoginButton'>Se connecter</a>
+						</div>
+					}
 				</div>
 			</div>
 		</>
