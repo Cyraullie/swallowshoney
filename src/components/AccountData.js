@@ -2,8 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 //import { BannerContext } from './BannerContext';
-//TODO list des commandes
-//TODO donnée personnel
 //TODO modification du mot de passe
 //TODO modification de l'adresse
 //TODO modification des donnée personnel
@@ -77,7 +75,8 @@ function AccountData() {
 				<div className="AccountDataArea">
 					{display == "profile" && 
 					<>
-						<div className='AccountPersonnalDataArea'>
+						<div style={{position: "relative"}} className='AccountPersonnalDataArea'>
+							<a style={{position: "absolute", right: 10, top: 10 }}><img className='icon' src='assets/edit.png' /></a>
 							<a>{ data.firstname } { data.lastname }</a>
 							<a>{ data.email }</a>
 							<a>{ data.phone }</a>
@@ -94,6 +93,7 @@ function AccountData() {
 					{display == "address" && 
 						data.addresses.map((address, index) => (
 							<div key={index} className='AccountAddressDataArea'>
+							  <a>{address.default ? "défaut" : ""}</a>
 							  <a>{address.address}</a>
 							  <a>
 								{address.npa} {address.city}
