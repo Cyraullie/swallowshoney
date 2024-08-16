@@ -1,12 +1,15 @@
 import React, { useContext, useRef, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link, Outlet } from "react-router-dom";
 import { BasketContext } from './BasketContext';
 import Basket from "./Basket";
 import Login from "./LoginPanel";
 
 const Header = ({ setIsLoged, isLoged, isDisplayedLogin, setIsDisplayedLogin }) => {
+	const navigate = useNavigate();
   const { basketContent } = useContext(BasketContext);
   const [isDisplayed, setIsDisplayed] = useState(false);
+  const [isDisplayedAccount, setIsDisplayedAccount] = useState(false);
   const basketRef = useRef(null);
 
   useEffect(() => {
@@ -44,9 +47,15 @@ const Header = ({ setIsLoged, isLoged, isDisplayedLogin, setIsDisplayedLogin }) 
     setIsDisplayedLogin(!isDisplayedLogin);
   }
 
+  function handleClickAccount() {
+    setIsDisplayedAccount(!isDisplayedAccount);
+  }
+
   function handleClickUnlog() {
     localStorage.removeItem("user_id")
+    handleClickAccount()
     login()
+		navigate(`/`);
   }
 
   const totalQuantity = basketContent.reduce((acc, item) => acc + item.quantity, 0);
@@ -59,10 +68,15 @@ const Header = ({ setIsLoged, isLoged, isDisplayedLogin, setIsDisplayedLogin }) 
           <Link className="link" to="aboutus">À propos</Link>
           <Link className="link" to="/"><img src="/assets/logo.png" className="App-logo" alt="logo" /></Link>
           <Link className="link" to="contact">Contact</Link>
+         
           {isLoged ? (
-            <div>
-              <Link className="link" to="account">Compte</Link>/<a className="link" onClick={handleClickUnlog}>Se déconnecter</a>
-            </div>
+            <div className="AccountContainer">
+             <a style={{marginRight: "10px", cursor: "pointer"}} onClick={handleClickAccount}>Profile</a>
+             <div className='AccountPopupArea' style={{visibility: isDisplayedAccount ? "visible" : "hidden"}}>
+              <Link onClick={handleClickAccount} className="link" to="account">Compte</Link>
+              <a className="link" onClick={handleClickUnlog}>Se déconnecter</a>
+             </div>
+           </div>
           ) : (
             <a className="link" onClick={handleClickLogin}>Se connecter</a>
           )}
@@ -74,7 +88,7 @@ const Header = ({ setIsLoged, isLoged, isDisplayedLogin, setIsDisplayedLogin }) 
           <div style={{visibility: isDisplayedLogin ? "visible" : "hidden"}}>
             <div className="HideArea"/>
             <Login close={handleClickLogin} login={login}/>
-          </div>    
+          </div>
         </nav>
       </div>
       <Outlet />

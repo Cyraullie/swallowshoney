@@ -104,7 +104,7 @@ function AccountData() {
 					{display == "order" && 
 						data.orders.map((order, index) => (
 							<div key={index} className='AccountPersonnalDataArea'>
-							  <a className='AccountDetailButton' onClick={() => handleNavigate(order.id)}>Afficher les détails</a>
+							  <a className='AccountDetailButton' style={{color: 'blue'}} onClick={() => handleNavigate(order.id)}>Afficher les détails</a>
 							  <a className='AccountDetailText'>Date de création : {order.created_date}</a>
 							  <a className='AccountDetailText'>Numéro de commande : {order.nb_order}</a>
 							  <a className='AccountDetailPrice'>Prix total - CHF {order.total_price}</a>

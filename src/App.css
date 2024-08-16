@@ -372,6 +372,7 @@
 }
 
 .LoginButton {
+  cursor: pointer;
   margin-top: 20px;
   width: 90%;
   font-weight: bold;
@@ -446,6 +447,25 @@
   margin-right: auto;
   display: flex;
   flex-direction: column;
+}
+
+.AccountContainer {
+  position: relative;
+}
+
+.AccountPopupArea {
+  position: absolute;
+  left: -50px;
+  margin-top: 27px;
+  z-index: 2;
+  background-color: rgb(233, 233, 233);
+  height: 50px;
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 0 0 10px 10px;
+  padding-bottom: 10px;
 }
 
 .AccountTitle {

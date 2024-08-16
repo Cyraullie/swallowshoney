@@ -1,7 +1,7 @@
 const Contact = () => {
 
   function connect () {
-    localStorage.setItem("users_id", 1)
+    localStorage.setItem("user_id", 1)
   }
 
   return (
