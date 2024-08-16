@@ -25,10 +25,15 @@ Route::post('/user', [UserController::class, 'data']);
 Route::post('/check_code', [UserController::class, 'check_code']);
 Route::post('/change_password', [UserController::class, 'change_password']);
 Route::post("/changeandcheck_password", [UserController::class, "changeandcheck_password"]);
+Route::post("/update_user", [UserController::class, "update_user"]);
+Route::post("/update_address", [UserController::class, "update_address"]);
+Route::post('/address', [UserController::class, 'address_data']);
 
 Route::get("/products", [ProductController::class, "show_all"]);
 Route::get("/product/{id}", [ProductController::class, "show"]);
+
 Route::post("/order", [OrderController::class, "store"]);
 Route::get("/order/{id}/{user_id}", [OrderController::class, "show"]);
+
 
 Route::post("/recover", [EmailController::class, "recoverPassword"]);

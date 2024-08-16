@@ -17,6 +17,7 @@ function AccountData() {
 	const [pwd, setPwd] = useState("");
 	const [confirmPwd, setConfirmPwd] = useState(""); 
 	const [samePwd, setSamePwd] = useState(false);
+	let user_id = localStorage.getItem("user_id");
     const [passwordErrors, setPasswordErrors] = useState({
         length: false,
         uppercase: false,
@@ -26,7 +27,6 @@ function AccountData() {
     });
 	//const { setShowBanner, setMessage, setType } = useContext(BannerContext);
 	useEffect(() => {
-		let user_id = localStorage.getItem("user_id");
 		const payload = { id: user_id };
 		axios.post("http://localhost:8000/api/user", payload)
             .then((response) => {
@@ -80,7 +80,15 @@ function AccountData() {
 
 	const handleNavigate = (id) => {
 		navigate(`/order/details`, { state: { id: id } });
-	  };
+	};
+
+	const handleNavigateEdit = () => {
+		navigate(`/account/edit`, { state: { id: user_id, edit: "personal" } })
+	}
+
+	const handleNavigateEditAddress = (id) => {
+		navigate(`/account/edit`, { state: { id: id, edit: "address" } })
+	}
 
 	const updateOldPwd = (event) => {
 		setOldPwd(event.target.value)
@@ -95,11 +103,8 @@ function AccountData() {
 	}
 
 	const handleClickPassword = () => {
-		console.log(passwordErrors)
-		console.log(samePwd)
 		if ((passwordErrors.length && passwordErrors.uppercase && passwordErrors.lowercase && passwordErrors.number && passwordErrors.special) && samePwd)
 		{
-			let user_id = localStorage.getItem("user_id");
 			const payload = { user_id, oldPwd, pwd };
 			console.log(payload)
 			axios.post("http://localhost:8000/api/changeandcheck_password", payload)
@@ -113,7 +118,7 @@ function AccountData() {
 				setTitle("données personnelles");
 				setDisplay("profile");
 				setPwd("")
-				setConfirmPwd("")
+				setConfirmPwd("s")
 				setOldPwd("")
 			})
 			.catch(error => {				
@@ -152,7 +157,7 @@ function AccountData() {
 					{display == "profile" && 
 					<>
 						<div style={{position: "relative"}} className='AccountPersonnalDataArea'>
-							<a style={{position: "absolute", right: 10, top: 10 }}><img className='icon' src='assets/edit.png' /></a>
+							<a style={{position: "absolute", right: 10, top: 10 }} onClick={handleNavigateEdit}><img className='icon' src='assets/edit.png' /></a>
 							<a>{ data.firstname } { data.lastname }</a>
 							<a>{ data.email }</a>
 							<a>{ data.phone }</a>
@@ -168,7 +173,8 @@ function AccountData() {
 					}
 					{display == "address" && 
 						data.addresses.map((address, index) => (
-							<div key={index} className='AccountAddressDataArea'>
+							<div style={{position: "relative"}} key={index} className='AccountAddressDataArea'>
+							  <a style={{position: "absolute", right: 10, top: 10 }} onClick={() => handleNavigateEditAddress(address.id)}><img className='icon' src='assets/edit.png' /></a>
 							  <a>{address.default ? "défaut" : ""}</a>
 							  <a>{address.address}</a>
 							  <a>
@@ -204,7 +210,7 @@ function AccountData() {
 									</div>
 								)}
 							</div>
-							<a onClick={handleClickPassword} className='LoginButton'>Se connecter</a>
+							<a onClick={handleClickPassword} className='LoginButton'>Modifier le mot de passe</a>
 						</div>
 					}
 				</div>

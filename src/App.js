@@ -9,6 +9,7 @@ import Order from "./pages/Order.js";
 import Recover from "./pages/Recover.js";
 import Account from "./pages/Account.js";
 import OrderDetails from "./pages/OrderDetails.js";
+import AccountEdit from "./pages/EditAccount.js";
 import './App.css';
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -37,6 +38,7 @@ export default function App() {
 						<Route path="contact" element={<Contact />} />
 						<Route path="order" element={<Order setIsDisplayedLogin={setIsDisplayedLogin}/>} />
 						<Route path="/order/details" element={<OrderDetails />} />
+						<Route path="/account/edit" element={<AccountEdit />} />
 						<Route path="*" element={<NoPage />} />
 						<Route path="register" element={<Register login={setIsLoged}/>} />
 						<Route path="ForgotPwd" element={<Recover />} />

@@ -74,9 +74,7 @@ const OrderDetails = () => {
 							</div>
 						))}
           </div>
-
         </div>
-        CUCU {id}
     </div>
     );
   };

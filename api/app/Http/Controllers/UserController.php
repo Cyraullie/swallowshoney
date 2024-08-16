@@ -101,7 +101,23 @@ class UserController extends Controller
                 'message' => 'User not found'
             ], 404);
         }
-    }   
+    }
+
+    public function address_data(Request $request)
+    {
+        $address = Address::where("users_id", $request->user_id)->find($request->address_id);
+
+        if ($address) {
+            return response()->json([
+                'message' => 'Address found',
+                'address' =>  $address,
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Address not found'
+            ], 404);
+        }
+    }
     
     public function check_code(Request $request)
     {
@@ -167,6 +183,52 @@ class UserController extends Controller
         } else {
             return response()->json([
                 'message' => 'User not found'
+            ], 404);
+        }
+    }
+
+    public function update_user(Request $request)
+    {
+        $user = User::find($request->user_id);
+        if ($user) {
+            if ($request->firstname)
+                $user->firstname = $request->firstname;
+            if ($request->lastname)
+                $user->lastname = $request->lastname;
+            if ($request->email)
+                $user->email = $request->email;
+            if ($request->phone)
+                $user->phone = $request->phone;
+            $user->save();
+            return response()->json([
+                'message' => 'Données personnelles mis à jour',
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'User not found'
+            ], 404);
+        }
+    }
+
+    public function update_address(Request $request)
+    {
+        $address = Address::find($request->address_id);
+        if ($address) {
+            if ($request->address)
+                $address->address = $request->address;
+            if ($request->npa)
+                $address->npa = $request->npa;
+            if ($request->city)
+                $address->city = $request->city;
+            if ($request->country)
+                $address->country = $request->country;
+            $address->save();
+            return response()->json([
+                'message' => 'Adresse changé',
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Address not found'
             ], 404);
         }
     }
