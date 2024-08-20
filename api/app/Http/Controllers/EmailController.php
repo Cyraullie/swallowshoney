@@ -45,4 +45,20 @@ class EmailController extends Controller
             'code' => $code,
         ]);
     }
+    
+    public function contact(Request $request)
+    {
+        $user = new User();
+        $user->firstname = $request->firstname;
+        $user->lastname = $request->lastname;
+        $user->email = $request->email;
+            
+        Mail::to("hirondellehoney@gmail.com")->send(new Email($user, 'emails.contact', "", $request->subject, $request->message));
+
+        return response()->json([
+            'message' => 'Email sent!',
+        ]);
+        
+
+    }
 }

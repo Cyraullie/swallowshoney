@@ -1,4 +1,3 @@
-//import AccountData from "../components/AccountData";
 import { useLocation } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import axios from "axios";

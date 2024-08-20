@@ -4,8 +4,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { BannerContext } from '../components/BannerContext';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
-//TODO edit personal data
-//TODO edit address
+
 const EditAccount = () => {
 	const navigate = useNavigate();
     const location = useLocation();

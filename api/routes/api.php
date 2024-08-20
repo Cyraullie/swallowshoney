@@ -37,3 +37,4 @@ Route::get("/order/{id}/{user_id}", [OrderController::class, "show"]);
 
 
 Route::post("/recover", [EmailController::class, "recoverPassword"]);
+Route::post("/contact", [EmailController::class, "contact"]);

@@ -14,6 +14,7 @@ class Email extends Mailable
     public $viewName;
     public $recoverCode;
     public $subject;
+    public $message;
 
     /**
      * Create a new message instance.
@@ -21,12 +22,13 @@ class Email extends Mailable
      * @param $user
      * @param string $viewName
      */
-    public function __construct($user, $viewName = 'emails.welcome', $code = "", $subject = "Bienvenue")
+    public function __construct($user, $viewName = 'emails.welcome', $code = "", $subject = "Bienvenue",  $text = "")
     {
         $this->user = $user;
         $this->viewName = $viewName;
         $this->recoverCode = $code;
         $this->subject = $subject;
+        $this->text = $text;
     }
 
     /**
@@ -37,8 +39,12 @@ class Email extends Mailable
     public function build()
     {
         return $this->view($this->viewName)
-                    ->with(['user' => $this->user]) // Transmettre des données à la vue
-                    ->with(['code' => $this->recoverCode])
+                    ->with([
+                        'user' => $this->user,
+                        'code' => $this->recoverCode,
+                        'text' => $this->text,
+                        'subject' => $this->subject,
+                    ])
                     ->subject($this->subject);
     }
 }
