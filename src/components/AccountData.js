@@ -3,9 +3,7 @@ import { BannerContext } from '../components/BannerContext';
 import axios from "axios";
 import { useNavigate, Link } from 'react-router-dom';
 //import { BannerContext } from './BannerContext';
-//TODO modification du mot de passe
-//TODO modification de l'adresse
-//TODO modification des donnée personnel
+//TODO pouvoir changer l'addresse par defaut
 function AccountData() {
 	const navigate = useNavigate();
 	const { setShowBanner, setMessage, setType } = useContext(BannerContext);
