@@ -1,6 +1,7 @@
 @import url("header.css");
 @import url("login.css");
 @import url("basket.css");
+@import url("product.css");
 
 :root {
   --black: #0D0D0D;
@@ -13,124 +14,21 @@
 
 .App {
   text-align: center;
-
-}
-
-.CardContainer {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-  justify-content: flex-start;
-  margin-bottom: 20px;
-  align-items: flex-start;
+  flex-direction: column;
+  height: 100vh; /* Prend toute la hauteur de la fenêtre */
 }
 
-.CardArea {
-  min-height: 420px;
-  width: 200px;
-  background-color: var(--miel);
-  margin-top: 20px;
-  border-radius: 10px;
-  position: relative;
-  margin-right: 5px;
-}
-
-.CardDiscount {
-  height: 50px;
-  width: 50px;
-  background-color: red;
-  color: white;
-  font-size: 20px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 100px;
-  position: absolute;
-  top: 5px;
-  right: 5px;
-}
-
-.CardDescription {
-  width: 180px;
-  height: 50px;
-  margin: auto;
-  margin-bottom: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.CardName {
-  height: 40px;
-  width: 180px;
-  margin: auto;
-  margin-top: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.CardTitle {
-  font-size: 20px;
-  font-weight: bold;
-  color: var(--black)
-}
-
-.CardImage {
-  height: 180px;
-  width: 180px;
-  margin: auto;
-  margin-top: 10px;
-}
-
-.CardImage > img {
-  height: 180px;
-  width: 180px;
-  border-radius: 10px;
-}
-
-.CardButtons {
-  height: 60px;
-  width: 180px;
-  margin: auto;
-  margin-top: 10px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.CardNumberButton, .CardBuyButton {
-  background-color: var(--amber);
-  color: white;
-  font-weight: bold;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.CardNumberButton {
-  border-radius: 15px 0 0  15px;
-  border: #0D0D0D;
-  width: 40px;
-  height: 58px;
-  padding-left: 15px;
-  padding-right: 10px;
-}
-
-.CardBuyButton {
-  width: 114px;
-  border-radius: 0 15px 15px 0;
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
 .body {
-  max-height: 89.7vh;
-  overflow-y: scroll;
+  flex-grow: 1; /* Prend tout l'espace restant */
+  max-height: calc(100vh - 65px); /* Limite la hauteur pour ne pas dépasser la fenêtre moins le header */
+  overflow-y: auto; /* Permet le défilement si le contenu dépasse */
 }
 
 .icon {
@@ -479,20 +377,7 @@
   background-color: #cc4141;
 }
 
-.basket-quantity {
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  background-color: red;
-  color: white;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-}
+
 
 @media (max-width: 768px) {
   .AccountArea {

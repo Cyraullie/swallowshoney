@@ -152,7 +152,7 @@ const EditAccount = () => {
     }
 
     return (
-      <div>
+        <div className="body">
         <h2>{edit == "personal" ? "MODIFICATION DES DONNÉES PERSONNELS" : "MODIFICATION DE L'ADRESSE"}</h2>
         <div>
             {edit == "personal" &&

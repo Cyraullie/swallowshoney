@@ -36,7 +36,7 @@ const OrderDetails = () => {
     }
 
     return (
-      <div>
+      <div className="body">
         <h2>DÉTAILS DE LA COMMANDE</h2>
         <div>
           <div>
