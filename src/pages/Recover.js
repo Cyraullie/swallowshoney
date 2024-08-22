@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { BannerContext } from '../components/BannerContext';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+const apiUrl = process.env.REACT_APP_API_URL_DEV;
 
 const Recover = () => {
 	const navigate = useNavigate();
@@ -41,7 +42,7 @@ const Recover = () => {
 
     const handleClick = () => {
 		const payload = { email: email };
-		axios.post("http://localhost:8000/api/recover", payload)
+		axios.post(apiUrl + "recover", payload)
 		.then((response) => {
 			setGetCode(response.data.code);
             setShowBanner(true);
@@ -59,7 +60,7 @@ const Recover = () => {
 
     const handleClickCheck = () => {
         const payload = { code, getCode, email};
-        axios.post("http://localhost:8000/api/check_code", payload)
+        axios.post(apiUrl + "check_code", payload)
         .then((response) => {
             setUser_id(response.data.user_id)
             setCheckCode(true);
@@ -91,7 +92,7 @@ const Recover = () => {
         if (samePwd && (passwordErrors.length && passwordErrors.uppercase && passwordErrors.lowercase && passwordErrors.number && passwordErrors.special))
         {
             const payload = { password, user_id };
-            axios.post("http://localhost:8000/api/change_password", payload)
+            axios.post(apiUrl + "change_password", payload)
             .then((response) => {
                 navigate("/")
             })

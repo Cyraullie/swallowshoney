@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { BannerContext } from '../components/BannerContext';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+const apiUrl = process.env.REACT_APP_API_URL_DEV;
 //TODO avoir une adresse par defaut au non
 const Register = ({ login }) => {
 	const navigate = useNavigate();
@@ -134,7 +135,7 @@ const Register = ({ login }) => {
         }
 
         const payload = { gender, firstname, lastname, email, password, city, npa: npa, address, country, phone, typeClient };
-        axios.post("http://localhost:8000/api/register", payload)
+        axios.post(apiUrl + "register", payload)
             .then(response => {
 				localStorage.setItem("user_id", response.data.user.id);
 				login(response.data.user.id);

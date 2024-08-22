@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { BannerContext } from '../components/BannerContext';
 import axios from "axios";
 import { useNavigate, Link } from 'react-router-dom';
+const apiUrl = process.env.REACT_APP_API_URL_DEV;
 //import { BannerContext } from './BannerContext';
 //TODO pouvoir changer l'addresse par defaut
 function AccountData() {
@@ -26,7 +27,7 @@ function AccountData() {
 	//const { setShowBanner, setMessage, setType } = useContext(BannerContext);
 	useEffect(() => {
 		const payload = { id: user_id };
-		axios.post("http://localhost:8000/api/user", payload)
+		axios.post(apiUrl + "user", payload)
             .then((response) => {
                 setData(response.data.user);
 				setLoading(false);
@@ -105,7 +106,7 @@ function AccountData() {
 		{
 			const payload = { user_id, oldPwd, pwd };
 			console.log(payload)
-			axios.post("http://localhost:8000/api/changeandcheck_password", payload)
+			axios.post(apiUrl + "changeandcheck_password", payload)
 			.then((response) => {
 				setShowBanner(true);
 				setMessage("Votre mot de passe a bien été changé");

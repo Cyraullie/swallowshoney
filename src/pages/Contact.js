@@ -3,6 +3,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { BannerContext } from '../components/BannerContext';
+const apiUrl = process.env.REACT_APP_API_URL_DEV;
 
 const Contact = () => {
 	const navigate = useNavigate();
@@ -27,7 +28,7 @@ const Contact = () => {
     if (user_id != null)
     {
       const payload = { id: user_id };
-      axios.post("http://localhost:8000/api/user", payload)
+      axios.post(apiUrl + "user", payload)
               .then((response) => {
                   setData(response.data.user);
                   setLoading(false);
@@ -65,7 +66,7 @@ const Contact = () => {
     else {
       const payload = { firstname, lastname, email, subject, message: text };
       console.log(payload)
-      axios.post("http://localhost:8000/api/contact", payload)
+      axios.post(apiUrl + "contact", payload)
       .then((response) => {
         setShowBanner(true);
         setMessage("Votre message a bien été envoyé");

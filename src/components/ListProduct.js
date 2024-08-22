@@ -1,6 +1,7 @@
 import React, { Component} from 'react';
 import axios from "axios";
 import Card from "../components/Card"
+const apiUrl = process.env.REACT_APP_API_URL_DEV;
 
 
 export default class ListProduct extends Component {
@@ -11,7 +12,7 @@ export default class ListProduct extends Component {
       }
 
     getData = () => {
-            axios.get("http://localhost:8000/api/products")
+            axios.get(apiUrl + "products")
             .then((response) => {
                 
                 this.getProductData(response.data) 

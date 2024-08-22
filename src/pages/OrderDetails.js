@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
+const apiUrl = process.env.REACT_APP_API_URL_DEV;
 //TODO faire l'affichage des détails de al commande
 const OrderDetails = () => {
     const location = useLocation();
@@ -11,7 +12,7 @@ const OrderDetails = () => {
 
     useEffect(() => {
       let user_id = localStorage.getItem("user_id");
-      axios.get("http://localhost:8000/api/order/" + id + "/" + user_id)
+      axios.get(apiUrl + "order/" + id + "/" + user_id)
         .then((response) => {
           setData(response.data.order);
           console.log(response.data.order)

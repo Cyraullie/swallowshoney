@@ -4,6 +4,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { BannerContext } from '../components/BannerContext';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+const apiUrl = process.env.REACT_APP_API_URL_DEV;
 
 const EditAccount = () => {
 	const navigate = useNavigate();
@@ -37,7 +38,7 @@ const EditAccount = () => {
             let user_id = localStorage.getItem("user_id");
             if (user_id == id) {
                 const payload = { id: id };
-                axios.post("http://localhost:8000/api/user", payload)
+                axios.post(apiUrl + "user", payload)
                 .then((response) => {
                     setData(response.data.user);
                     setLoading(false);
@@ -52,7 +53,7 @@ const EditAccount = () => {
         {
             let user_id = localStorage.getItem("user_id");
             const payload = { user_id: user_id, address_id: id };
-            axios.post("http://localhost:8000/api/address", payload)
+            axios.post(apiUrl + "address", payload)
             .then((response) => {
                 setData(response.data.address);
                 setLoading(false);
@@ -99,7 +100,7 @@ const EditAccount = () => {
     const handleClickPersonal = () => {
         const payload = { user_id: id, firstname, lastname, email, phone };
         console.log(payload)
-        axios.post("http://localhost:8000/api/update_user", payload)
+        axios.post(apiUrl + "update_user", payload)
 			.then((response) => {
 				setShowBanner(true);
 				setMessage("Votre profile a bien été mis à jour");
@@ -122,7 +123,7 @@ const EditAccount = () => {
     const handleClickAddress = () => {
         const payload = { address_id: id, address, npa, city, country };
         console.log(payload)
-        axios.post("http://localhost:8000/api/update_address", payload)
+        axios.post(apiUrl + "update_address", payload)
 			.then((response) => {
 				setShowBanner(true);
 				setMessage("Votre adresse a bien été mis à jour");

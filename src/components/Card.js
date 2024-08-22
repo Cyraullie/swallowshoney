@@ -3,6 +3,8 @@ import React, { useContext, useState } from 'react';
 import axios from "axios";
 import { BannerContext } from './BannerContext';
 import { BasketContext } from './BasketContext';
+const apiUrl = process.env.REACT_APP_API_URL_DEV;
+const fileUrl = process.env.REACT_APP_FILE_URL_DEV;
 
 function Card(data) {
 	const [inputValue, setInputValue] = useState(1);
@@ -26,7 +28,7 @@ function Card(data) {
 
   const handleClick = (productId) => {
     
-    axios.get("http://localhost:8000/api/product/"+productId)
+    axios.get(apiUrl + "product/"+productId)
     .then((response) => {    
     	const product = {id: response.data.id, name: response.data.name, quantity: inputValue, price: response.data.price }
 		addToBasket(product);
@@ -51,7 +53,7 @@ function Card(data) {
           {data.discount !== 0 && (
             <div className='CardDiscount'>{data.discount}%</div>
           )}
-          <div className="CardImage"><img src={"/assets/"+ data.imgsrc}></img></div>
+          <div className="CardImage"><img src={fileUrl + data.imgsrc}></img></div>
           <div className="CardName"><a className="CardTitle">{data.title}</a></div>
           <div className='CardDescription'><a>{data.description}</a></div>
           <div className='CardPrice'>{data.price} CHF/unité</div>

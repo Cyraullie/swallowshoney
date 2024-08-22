@@ -3,6 +3,7 @@ import OrderArticles from "../components/OrderArcticles";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { BasketContext } from '../components/BasketContext';
+const apiUrl = process.env.REACT_APP_API_URL_DEV;
 //TODO verifier si le user_id existe sinon 
 //TODO faire un système de facture et plus de payement
 //TODO ajouter une zone de texte pour s'il y a des messages
@@ -40,7 +41,7 @@ const Order = ({ setIsDisplayedLogin }) => {
     else{
 
       const payload_user = { id: user_id };
-      axios.post("http://localhost:8000/api/user", payload_user)
+      axios.post(apiUrl + "user", payload_user)
         .then((response) => {
           setAddresses_id(response.data.user.addresses[0].id);
         
@@ -50,7 +51,7 @@ const Order = ({ setIsDisplayedLogin }) => {
         const payload = { users_id: user_id, basketContent: basketContent, totalPrice: totalPrice, created_date: formatDate(date), addresses_id: response.data.user.addresses[0].id, tva: 0};
         
         console.log(payload)
-        axios.post("http://localhost:8000/api/order", payload)
+        axios.post(apiUrl + "order", payload)
           .then((response) => {
             console.log(response)
               clearBasket();

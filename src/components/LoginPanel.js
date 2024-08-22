@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import axios from "axios";
+const apiUrl = process.env.REACT_APP_API_URL_DEV;
 
 const Login = ({ close, login }) => {
 	const [email, setEmail] = useState("");
@@ -8,7 +9,7 @@ const Login = ({ close, login }) => {
 
 	const handleClick = () => {
 		const payload = { email: email, password: password };
-		axios.post("http://localhost:8000/api/login", payload)
+		axios.post(apiUrl + "login", payload)
 		.then((response) => {
 			localStorage.setItem("user_id", response.data.user.id);
 			login();

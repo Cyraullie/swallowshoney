@@ -10,6 +10,8 @@ const Header = ({ setIsLoged, isLoged, isDisplayedLogin, setIsDisplayedLogin }) 
   const { basketContent } = useContext(BasketContext);
   const [isDisplayed, setIsDisplayed] = useState(false);
   const [isDisplayedAccount, setIsDisplayedAccount] = useState(false);
+  const [isBurgerOpen, setIsBurgerOpen] = useState(false);
+	const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
   const basketRef = useRef(null);
 
   useEffect(() => {
@@ -53,43 +55,89 @@ const Header = ({ setIsLoged, isLoged, isDisplayedLogin, setIsDisplayedLogin }) 
 
   function handleClickUnlog() {
     localStorage.removeItem("user_id")
-    handleClickAccount()
+    setIsDisplayedAccount(false)
     login()
 		navigate(`/`);
   }
+
+  function toggleBurgerMenu() {
+    setIsBurgerOpen(!isBurgerOpen);
+    if (isSubMenuOpen) {
+			toggleSubMenu();
+		}
+  }
+
+  function toggleSubMenu() {
+		setIsSubMenuOpen(!isSubMenuOpen);
+	}
+
+  function handleMenuItemClick() {
+		if (isBurgerOpen) {
+			toggleBurgerMenu(); // Close the burger menu if it's open
+		}
+	}
 
   const totalQuantity = basketContent.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
     <>
       <div className="Header">
+        
         <nav>
-          <Link className="link" to="product">Product</Link>
-          <Link className="link" to="aboutus">À propos</Link>
-          <Link className="link" to="/"><img src="/assets/logo.png" className="App-logo" alt="logo" /></Link>
-          <Link className="link" to="contact">Contact</Link>
-         
-          {isLoged ? (
-            <div className="AccountContainer">
-             <a style={{marginRight: "10px", cursor: "pointer"}} onClick={handleClickAccount}>Profile</a>
-             <div className='AccountPopupArea' style={{visibility: isDisplayedAccount ? "visible" : "hidden"}}>
-              <Link onClick={handleClickAccount} className="link" to="account">Compte</Link>
-              <a className="link" onClick={handleClickUnlog}>Se déconnecter</a>
-             </div>
-           </div>
-          ) : (
-            <a className="link" onClick={handleClickLogin}>Se connecter</a>
-          )}
-          <div className="BasketContainer" ref={basketRef}>
-            <img className="icon" onClick={handleClick} src="/assets/backet.png" alt='icon_panier'></img>
-            <span className="basket-quantity">{totalQuantity}</span>
-            <div style={{visibility: isDisplayed ? "visible" : "hidden"}}><Basket /></div>
-          </div>
-          <div style={{visibility: isDisplayedLogin ? "visible" : "hidden"}}>
-            <div className="HideArea"/>
-            <Login close={handleClickLogin} login={login}/>
-          </div>
+          <div className={`nav-links ${isBurgerOpen ? "open" : ""}`}>
+						<Link className="link" to="product" onClick={handleMenuItemClick}>Product</Link>
+						<Link className="link" to="aboutus" onClick={handleMenuItemClick}>À propos</Link>
+						<Link className="link" to="contact" onClick={handleMenuItemClick}>Contact</Link>
+            {isLoged ? (
+							<a className="link" onClick={toggleSubMenu}>Profile <span className={`arrow ${isSubMenuOpen ? "rotate" : ""}`}>▼</span></a>
+            ) : (
+              <a className="link" onClick={() => { handleClickLogin(); handleMenuItemClick(); toggleSubMenu(); }}>Se connecter</a>
+            )}
+            {isSubMenuOpen ? (
+              <>
+                <Link  onClick={() => { handleMenuItemClick();  toggleSubMenu(); }} className="link" to="account">Compte</Link>
+                <a className="link" onClick={() => { handleClickUnlog(); handleMenuItemClick(); toggleSubMenu(); }}>Se déconnecter</a>
+              </>
+            ): ""}
+					</div>
+
+          <Link className="link large-screen" to="product" onClick={toggleBurgerMenu}>Product</Link>
+          <Link className="link large-screen" to="aboutus" onClick={toggleBurgerMenu}>À propos</Link>
+					<Link to="/"><img src="/assets/logo.png" className="App-logo" alt="logo" /></Link>
+          <Link className="link large-screen" to="contact" onClick={toggleBurgerMenu}>Contact</Link>
+					
+
+					{isLoged ? (
+						<div className="AccountContainer">
+							<a className="link large-screen" style={{marginRight: "10px"}} onClick={handleClickAccount}>Profile</a>
+							<div className='AccountPopupArea  large-screen' style={{visibility: isDisplayedAccount ? "visible" : "hidden"}}>
+								<Link onClick={handleClickAccount} className="link" to="account">Compte</Link>
+								<a className="link" onClick={handleClickUnlog}>Se déconnecter</a>
+							</div>
+						</div>
+					) : (
+						<a className="link large-screen" onClick={handleClickLogin}>Se connecter</a>
+					)}
+					<div className="BasketContainer  large-screen" ref={basketRef}>
+						<img className="icon" onClick={handleClick} src="/assets/backet.png" alt='icon_panier'></img>
+						<span className="basket-quantity">{totalQuantity}</span>
+						<div style={{visibility: isDisplayed ? "visible" : "hidden"}}><Basket /></div>
+					</div>
+					<div style={{visibility: isDisplayedLogin ? "visible" : "hidden"}}>
+						<div className="HideArea"/>
+						<Login close={handleClickLogin} login={login}/>
+					</div>
         </nav>
+        <div className="BasketContainer small-screen" ref={basketRef}>
+						<img className="icon" onClick={handleClick} src="/assets/backet.png" alt='icon_panier'></img>
+						<span className="basket-quantity">{totalQuantity}</span>
+						<div style={{visibility: isDisplayed ? "visible" : "hidden"}}><Basket /></div>
+					</div>
+        <div className={`burger-menu ${isBurgerOpen ? "open" : ""}`} onClick={toggleBurgerMenu}>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
       </div>
       <Outlet />
     </>

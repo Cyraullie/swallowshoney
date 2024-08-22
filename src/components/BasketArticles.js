@@ -33,7 +33,7 @@ const BasketArticles = () => {
   };
 
   return (
-    <div className="BasketArticles">
+    <div className="BasketArticles" style={{ overflowY: "scroll"}}>
       {basketContent.map(item => (
         <div className='BasketArticle' key={item.id}>
           <a>{item.name}</a>
