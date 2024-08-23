@@ -156,25 +156,25 @@ const EditAccount = () => {
         <h2>{edit == "personal" ? "MODIFICATION DES DONNÉES PERSONNELS" : "MODIFICATION DE L'ADRESSE"}</h2>
         <div>
             {edit == "personal" &&
-                <div className='RegisterPersonal'>
-                    <input type='text' name='firstname' style={{ borderColor: formErrors.firstname ? 'red' : 'black' }} className='LoginInput' value={firstname == "" ? data.firstname : firstname} placeholder='Prénom' onChange={handleChange} />
-					<input type='text' name='lastname' style={{ borderColor: formErrors.lastname ? 'red' : 'black' }} className='LoginInput' value={lastname == "" ? data.lastname : lastname} placeholder='Nom' onChange={handleChange} />
-					<input type='email' name='email' style={{ borderColor: formErrors.email ? 'red' : 'black' }} className='LoginInput' value={email == "" ? data.email : email} placeholder='Adresse e-mail' onChange={handleChange} />
-					<input type='tel' name='phone' style={{ borderColor: formErrors.phone ? 'red' : 'black' }} className='LoginInput' value={phone == "" ? data.phone : phone} placeholder='Numéro de téléphone' onChange={handleChange} />
-					<a onClick={handleClickPersonal} className='LoginButton'>Mettre à jour</a>
+                <div className='AccountPersonal'>
+                    <input type='text' name='firstname' style={{ borderColor: formErrors.firstname ? 'red' : 'black' }} className='AccountInput' value={firstname == "" ? data.firstname : firstname} placeholder='Prénom' onChange={handleChange} />
+					<input type='text' name='lastname' style={{ borderColor: formErrors.lastname ? 'red' : 'black' }} className='AccountInput' value={lastname == "" ? data.lastname : lastname} placeholder='Nom' onChange={handleChange} />
+					<input type='email' name='email' style={{ borderColor: formErrors.email ? 'red' : 'black' }} className='AccountInput' value={email == "" ? data.email : email} placeholder='Adresse e-mail' onChange={handleChange} />
+					<input type='tel' name='phone' style={{ borderColor: formErrors.phone ? 'red' : 'black' }} className='AccountInput' value={phone == "" ? data.phone : phone} placeholder='Numéro de téléphone' onChange={handleChange} />
+					<a onClick={handleClickPersonal} className='AccountButton'>Mettre à jour</a>
                 </div>
             }
             {edit == "address" &&
-                <div className='RegisterAddress'>
-                <input type='text' name='address' style={{ borderColor: formErrors.address ? 'red' : 'black' }} className='LoginInput' value={address == "" ? data.address : address} placeholder='Adresse' onChange={handleChange} />
-                <input type='text' name='npa' className='LoginInput' style={{ borderColor: formErrors.npa ? 'red' : 'black' }} value={npa == "" ? data.npa : npa} placeholder='NPA' onChange={handleChange} />
-                <input type='text' name='city' style={{ borderColor: formErrors.city ? 'red' : 'black' }} className='LoginInput' value={city == "" ? data.city : city} placeholder='Ville' onChange={handleChange} />
-                <select name='country' style={{ borderColor: formErrors.country ? 'red' : 'black' }} value={country == "" ? data.country : country} className='LoginInput' onChange={handleChange}>
+                <div className='AccountAddress'>
+                <input type='text' name='address' style={{ borderColor: formErrors.address ? 'red' : 'black' }} className='AccountInput' value={address == "" ? data.address : address} placeholder='Adresse' onChange={handleChange} />
+                <input type='text' name='npa' className='AccountInput' style={{ borderColor: formErrors.npa ? 'red' : 'black' }} value={npa == "" ? data.npa : npa} placeholder='NPA' onChange={handleChange} />
+                <input type='text' name='city' style={{ borderColor: formErrors.city ? 'red' : 'black' }} className='AccountInput' value={city == "" ? data.city : city} placeholder='Ville' onChange={handleChange} />
+                <select name='country' style={{ borderColor: formErrors.country ? 'red' : 'black' }} value={country == "" ? data.country : country} className='AccountInput' onChange={handleChange}>
                     <option value="" disabled>Pays</option>
                     <option value="Suisse">Suisse</option>
                     <option value="France">France</option>
                 </select>
-                <a onClick={handleClickAddress} className='LoginButton'>Mettre à jour</a>
+                <a onClick={handleClickAddress} className='AccountButton'>Mettre à jour</a>
             </div>
             }
         </div>

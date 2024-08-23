@@ -35,7 +35,7 @@ const Login = ({ close, login }) => {
 			<div className="LoginTitle">
 				<a className='Login'>Se connecter</a>
 				<Link onClick={close} login={login} className="Register" to="register">S'incrire</Link>
-				<a className='CloseButton' onClick={close}>X</a>
+				<a className='CloseButton' onClick={close}><img style={{ height: "15px", margin: "auto" }} src='assets/close.png'/></a>
 			</div>
             <div className='LoginData'>
 				<input 

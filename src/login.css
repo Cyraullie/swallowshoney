@@ -24,7 +24,7 @@
 }
 
 .Login {
-	color: #6192fb;
+	color: var(--amber);
 	font-weight: bold;
 	border-bottom: 2px solid currentColor;
 }
@@ -54,7 +54,48 @@
 	margin-right: auto;
 	padding: 20px;
 	border-radius: 10px;
-	background-color: #6192fb;
+	background-color: var(--amber);
+}
+
+.ForgotPwd {
+	color: var(--amber);
+	text-decoration: none;
+	text-align: left;
+	margin-top: 10px;
+}
+
+.RecoverArea {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+	flex-direction: column;
+}
+
+.CloseButton {
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	cursor: pointer;
+	height: 19px;
+	width: 19px;
+	padding: 5px;
+	border-radius: 100%;
+	display: flex;
+	justify-content: center;
+	color: wheat;
+	background-color: var(--amber);
+}
+
+.HideArea {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	background-color: #000000;
+	z-index: 1;
+	opacity: 50%;
 }
 
 @media (max-width: 768px) {

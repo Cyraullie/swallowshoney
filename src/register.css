@@ -1,0 +1,92 @@
+.Register {
+	font-weight: bold;
+	color: grey;
+	text-decoration: none;
+}
+
+.Register:hover {
+	color: black;
+}
+
+.RegisterArea {
+	display: flex;
+	flex-direction: column;
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.RegisterPersonal > select {
+	width: 49%;
+}
+
+.RegisterPersonal > input {
+	width: 48%;
+}
+
+.RegisterAddress > input {
+	width: 48%;
+}
+
+.RegisterAddress > select {
+	width: 49%;
+}
+
+.RegisterPassword > input {
+	width: 48%;
+}
+
+.RegisterPwdRule {
+	width: 100%;
+}
+
+.RegisterPersonal, .RegisterPassword, .RegisterAddress {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 25px;
+}
+
+.RegisterButton {
+	width: 70%;
+	margin-top: 20px;
+	font-weight: bold;
+	color: white;  
+	font-size: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 20px;
+	border-radius: 10px;
+	background-color: var(--amber);
+}
+
+@media (max-width: 768px) {
+	.RegisterPersonal > select {
+		width: 100%;
+	}
+	
+	.RegisterPersonal > input {
+		width: 100%;
+	}
+	
+	.RegisterAddress > input {
+		width: 100%;
+	}
+	
+	.RegisterAddress > select {
+		width: 100%;
+	}
+	
+	.RegisterPassword > input {
+		width: 100%;
+	}
+
+	.RegisterButton {
+		margin-bottom: 20px;
+		margin-top: 0px;
+	}
+}
