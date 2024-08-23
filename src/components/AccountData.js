@@ -144,7 +144,7 @@ function AccountData() {
 				<div className="AccountMenuArea">
 				<h3>Bienvenue, { data.firstname}</h3>
 				<div className='AccountMenuButtonArea'>
-					<a className={`AccountMenuButton ${display == "profile" ? "selected" : ""}`} onClick={() => handleClick("profile")}>PROFILE</a>
+					<a className={`AccountMenuButton ${display == "profile" ? "selected" : ""}`} onClick={() => handleClick("profile")}>PROFIL</a>
 					<a className={`AccountMenuButton ${display == "address" ? "selected" : ""}`} onClick={() => handleClick("address")}>CARNET D'ADRESSES</a>
 					<a className={`AccountMenuButton ${display == "order" ? "selected" : ""}`} onClick={() => handleClick("order")}>MES COMMANDES</a>
 					<a className={`AccountMenuButton ${display == "password" ? "selected" : ""}`} onClick={() => handleClick("password")}>GÉRER LE MOT DE PASSE</a>
