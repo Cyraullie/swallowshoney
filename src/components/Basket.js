@@ -3,7 +3,7 @@ import BasketArticles from "./BasketArticles";
 import { Link } from "react-router-dom";
 import { BasketContext } from './BasketContext';
 
-const Basket = () => {
+const Basket = ({ close }) => {
   const { basketContent } = useContext(BasketContext);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalQuantity, setTotalQuantity] = useState(0);
@@ -50,7 +50,7 @@ const Basket = () => {
           <a>Sous-Total : {totalPrice.toFixed(2)} CHF</a>
         </div>
         <div className="BasketBuy">
-          <Link className="BasketBuyButton" to="order">Passer à la commande</Link>
+          <Link onClick={close} className="BasketBuyButton" to="order">Passer à la commande</Link>
         </div>
       </div>
     </>

@@ -121,7 +121,7 @@ const Header = ({ setIsLoged, isLoged, isDisplayedLogin, setIsDisplayedLogin }) 
 					<div className="BasketContainer  large-screen" ref={basketRef}>
 						<img className="icon" onClick={handleClick} src="/assets/backet.png" alt='icon_panier'></img>
 						<span className="basket-quantity">{totalQuantity}</span>
-						<div style={{visibility: isDisplayed ? "visible" : "hidden"}}><Basket /></div>
+						<div style={{visibility: isDisplayed ? "visible" : "hidden"}}><Basket close={handleClick}/></div>
 					</div>
 					<div style={{visibility: isDisplayedLogin ? "visible" : "hidden"}}>
 						<div className="HideArea"/>
@@ -131,7 +131,7 @@ const Header = ({ setIsLoged, isLoged, isDisplayedLogin, setIsDisplayedLogin }) 
         <div className="BasketContainer small-screen" ref={basketRef}>
 						<img className="icon" onClick={handleClick} src="/assets/backet.png" alt='icon_panier'></img>
 						<span className="basket-quantity">{totalQuantity}</span>
-						<div style={{visibility: isDisplayed ? "visible" : "hidden"}}><Basket /></div>
+						<div style={{visibility: isDisplayed ? "visible" : "hidden"}}><Basket close={handleClick}/></div>
 					</div>
         <div className={`burger-menu ${isBurgerOpen ? "open" : ""}`} onClick={toggleBurgerMenu}>
           <div></div>

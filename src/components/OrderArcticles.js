@@ -29,23 +29,26 @@ const OrderArticles = ({ orderContent }) => {
     <>
     <div className="OrderArticles">
       {basketContent.map(item => (
-        <div className='OrderArticle' key={item.id}>
-          <a className='NameArticle'>{item.name}</a>
-          <a>
-            <input
-              className="BasketNumberButton"
-              type="number"
-              min={1}
-              value={inputValues[item.id] || item.quantity}
-              onChange={(event) => handleQuantityChange(item.id, event)}
-            />
-          pcs</a>
-          <a>{item.price} .-/pcs</a>
-          <a>{(item.quantity * item.price).toFixed(2)} .-</a>
-          <a className="TrashButton" onClick={() => handleClick(item.id)}>
+        <div style={{ display: "flex" }}>
+          <div className='OrderArticle' key={item.id}>
+            <a className='NameArticle'>{item.name}</a>
+            <a>
+              <input
+                className="BasketNumberButton"
+                type="number"
+                min={1}
+                value={inputValues[item.id] || item.quantity}
+                onChange={(event) => handleQuantityChange(item.id, event)}
+              />
+            pcs</a>
+            <a>{item.price} .-/pcs</a>
+            <a>{(item.quantity * item.price).toFixed(2)} .-</a>
+            
+          </div>
+          <a className="TrashButton" style={{ marginRight: "20px" }} onClick={() => handleClick(item.id)}>
             <img className='icon' src='assets/trash.png' alt='delete' />
           </a>
-        </div>
+      </div>
       ))}
     </div>
     </>

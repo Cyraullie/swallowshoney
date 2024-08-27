@@ -1,0 +1,97 @@
+
+.OrderArticles {
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+
+.OrderArea {
+	background-color: var(--miel);;
+	display: flex;
+	flex-direction: column;
+	width: 95%;
+	margin: auto;
+	margin-top: 19px;
+	justify-content: space-between;
+	border-radius: 0 0 10px 10px;
+}
+
+.OrderTitle {
+	border-bottom: #0D0D0D 1px solid;
+	background-color: var(--orange);
+	font-size: 20px;
+	padding-top: 5px;
+}
+
+.OrderArticle {
+	display: flex;
+	justify-content: space-between;
+	margin: auto;
+	width: 90%;
+	height: 40px;
+}
+
+.OrderArticle > a {
+	width: 25%;
+}
+
+.OrderArticle > .NameArticle {
+	text-align: left;
+}
+
+.OrderTotalPrice {
+	width: 25%;
+	margin-left: auto;
+	padding-bottom: 20px;
+	border-top: #0D0D0D 1px solid;
+}
+
+.OrderDetail {
+	width: 95%;
+	margin-right: auto;
+}
+
+.OrderBuyButton {
+	height: 50px;
+	cursor: pointer;
+	background-color: var(--amber);
+	color: white;
+	font-weight: bold;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 0 0 10px 10px;
+	text-decoration: none; 
+	margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+	.OrderArticle {
+		display: flex;
+		margin: auto;
+		margin-left: 20px;
+		margin-right: 0px;
+		width: 80%;
+		height: 60px;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		margin-bottom: 20px;
+		align-items: flex-start;
+	}
+
+	.OrderArticle > a {
+		width: auto;
+	}
+
+	.OrderArticle > .NameArticle {
+		width: 100%;
+	}
+
+	.OrderArticles {
+		padding-bottom: 10px;
+	}
+
+	.OrderArea {
+		margin-bottom: 10px;
+	}
+}

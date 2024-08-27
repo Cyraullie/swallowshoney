@@ -4,6 +4,7 @@
 @import url("basket.css");
 @import url("product.css");
 @import url("account.css");
+@import url("order.css");
 
 :root {
   --black: #0D0D0D;
@@ -12,7 +13,6 @@
   --orange: #F29E38;
   --miel: #F2CB57;
 }
-
 
 .App {
   text-align: center;
@@ -37,71 +37,6 @@ html, body {
   height: 30px;
   width: 30px;
   cursor: pointer;
-}
-
-.OrderArticles {
-  padding-top: 50px;
-  padding-bottom: 50px;
-}
-
-.OrderArea {
-  background-color: rgb(233, 233, 233);
-  display: flex;
-  flex-direction: column;
-  width: 95%;
-  margin: auto;
-  margin-top: 19px;
-  justify-content: space-between;
-  border-radius: 0 0 10px 10px;
-}
-
-.OrderTitle {
-  border-bottom: #0D0D0D 1px solid;
-  background-color: rgb(213, 213, 213);
-  font-size: 20px;
-  padding-top: 5px;
-}
-
-.OrderArticle {
-  display: flex;
-  justify-content: space-between;
-  margin: auto;
-  width: 90%;
-  height: 40px;
-}
-
-.OrderArticle > a {
-  width: 25%;
-}
-
-.OrderArticle > .NameArticle {
-  text-align: left;
-}
-
-.OrderTotalPrice {
-  width: 25%;
-  margin-left: auto;
-  padding-bottom: 20px;
-  border-top: #0D0D0D 1px solid;
-}
-
-.OrderDetail {
-  width: 95%;
-  margin-right: auto;
-}
-
-.OrderBuyButton {
-  height: 50px;
-  cursor: pointer;
-  background-color: var(--amber);
-  color: white;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0 0 10px 10px;
-  text-decoration: none; 
-  margin-top: 10px;
 }
 
 .App-logo {
