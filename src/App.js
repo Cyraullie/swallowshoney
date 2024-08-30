@@ -20,11 +20,11 @@ import { BasketProvider } from './components/BasketContext';
 //TODO faire la feuille de contact (formulaire)
 //TODO faire la page de A propos pour parler de l'entreprise
 //TODO addapter pour la version mobile
-//TODO mettre en place le calcule sur le prix si rabais
-//TODO afficher le rabais dans le panier et la commande
+//TODO pouvoir entrer le code d'une carte cadeau dans la commande
 //TODO mettre une option pour activer et desactiver un produit
 //TODO afficher que les produits activer
-//TODO faire une table rabais et le link dans le produit et dans la commande 
+//TODO faire une table carte cadeau
+//TODO faire une vue admin
 export default function App() {
 	const [isLoged, setIsLoged] = useState(false);
 	const [isDisplayedLogin, setIsDisplayedLogin] = useState(false);

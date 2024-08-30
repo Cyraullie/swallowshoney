@@ -50,9 +50,6 @@ const handleClick = (productId) => {
 	return (
 	<div className="CardArea">
 		<div>
-			{data.discount !== 0 && (
-				<div className='CardDiscount'>{data.discount}%</div>
-			)}
 			<div>
 				<div className="CardImage"><img src={fileUrl + data.imgsrc}></img></div>
 			</div>

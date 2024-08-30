@@ -29,8 +29,10 @@ export default class ListProduct extends Component {
         for(let i = 0; i < data.length; i++) {
             productData.push(
                 <>
+                {data[i].enabled !== 0 && (
                     <Card title={data[i].name} imgsrc={data[i].imgsrc} discount={data[i].discount} description={data[i].description} productId={data[i].id} price={data[i].price} quantity={data[i].actual_quantity}/>
-                </>
+                )}
+                    </>
             )
         }
 
