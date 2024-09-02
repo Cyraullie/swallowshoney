@@ -35,7 +35,7 @@ class OrderController extends Controller
             $order->created_date = $validatedData['created_date'];
             $order->addresses_id = $validatedData['addresses_id'];
             $order->tva = $validatedData['tva'];
-            $order->state = 'new';
+            $order->state = 'unpaid';
             $order->shipping_costs = $validatedData['shipping_cost'] ?? 0;
             $order->additional_message = $validatedData['additional_message'] ?? '';
             $order->save();

@@ -64,6 +64,10 @@
 	margin-top: 10px;
 }
 
+.OrderImage {
+	height: 100px;
+}
+
 @media (max-width: 768px) {
 	.OrderArticle {
 		display: flex;

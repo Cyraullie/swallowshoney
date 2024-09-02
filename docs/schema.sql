@@ -68,10 +68,10 @@ CREATE TABLE IF NOT EXISTS `SwallowsHoneyDB`.`products` (
   `name` VARCHAR(255) NOT NULL,
   `description` MEDIUMTEXT NOT NULL,
   `price` DECIMAL(10,2) NOT NULL,
-  `discount` INT NULL,
   `group_products_id` INT NOT NULL,
   `imgsrc` VARCHAR(255) NOT NULL,
   `actual_quantity` INT NOT NULL DEFAULT 0,
+  `enabled` TINYINT NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   INDEX `fk_products_group_products_idx` (`group_products_id` ASC) VISIBLE,
@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `SwallowsHoneyDB`.`orders` (
   `nb_order` VARCHAR(255) NOT NULL,
   `created_date` DATE NOT NULL,
   `addresses_id` INT NOT NULL,
-  `state` ENUM('new', 'open', 'send', 'close') NOT NULL DEFAULT 'new',
+  `state` ENUM('unpaid', 'paid', 'open', 'send', 'close') NOT NULL DEFAULT 'new',
   `tva` DECIMAL(10,2) NOT NULL,
   `shipping_costs` DECIMAL(10,2) NULL,
   `additional_message` LONGTEXT NULL,
@@ -155,6 +155,28 @@ CREATE TABLE IF NOT EXISTS `SwallowsHoneyDB`.`orders_has_products` (
   CONSTRAINT `fk_orders_has_products_products1`
     FOREIGN KEY (`products_id`)
     REFERENCES `SwallowsHoneyDB`.`products` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SwallowsHoneyDB`.`giftcards`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `SwallowsHoneyDB`.`giftcards` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `code` VARCHAR(255) NOT NULL,
+  `max_value` DECIMAL(10,2) NOT NULL,
+  `value` DECIMAL(10,2) NOT NULL,
+  `enabled` TINYINT NOT NULL DEFAULT 0,
+  `orders_has_products_id` INT NOT NULL,
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `code_UNIQUE` (`code` ASC) VISIBLE,
+  INDEX `fk_giftcards_orders_has_products1_idx` (`orders_has_products_id` ASC) VISIBLE,
+  CONSTRAINT `fk_giftcards_orders_has_products1`
+    FOREIGN KEY (`orders_has_products_id`)
+    REFERENCES `SwallowsHoneyDB`.`orders_has_products` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

@@ -2,6 +2,7 @@ import { useLocation } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 const apiUrl = process.env.REACT_APP_API_URL_DEV;
+const fileUrl = process.env.REACT_APP_FILE_URL_DEV;
 //TODO faire l'affichage des détails de al commande
 const OrderDetails = () => {
     const location = useLocation();
@@ -67,7 +68,7 @@ const OrderDetails = () => {
           <p>Total de la commande chf {data.total_price}</p>
             {data.products.map((product, index) => (
 							<div key={index}>
-                <img src={"/assets/"+ product.imgsrc}></img>
+                <img className='OrderImage' src={fileUrl + product.imgsrc}></img>
                 <p>{product.name}</p>
                 <p>QUANTITÉ : {product.pivot.quantity}</p>
                 <p>CHF : {product.price * product.pivot.quantity}</p>

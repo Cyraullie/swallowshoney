@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import OrderArticles from "../components/OrderArcticles";
+import { BannerContext } from '../components/BannerContext';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { BasketContext } from '../components/BasketContext';
@@ -9,6 +10,7 @@ const apiUrl = process.env.REACT_APP_API_URL_DEV;
 //TODO ajouter une zone de texte pour s'il y a des messages
 const Order = ({ setIsDisplayedLogin }) => {
   const navigate = useNavigate();
+	const { setShowBanner, setMessage, setType } = useContext(BannerContext);
   const { basketContent, clearBasket } = useContext(BasketContext);
   const [totalPrice, setTotalPrice] = useState(0);
   const [addresses_id, setAddresses_id] = useState();
@@ -55,10 +57,21 @@ const Order = ({ setIsDisplayedLogin }) => {
           .then((response) => {
             console.log(response)
               clearBasket();
+              setShowBanner(true);
+              setMessage("Votre commande a bien été créée");
+              setType("success");
+              setTimeout(() => {
+                setShowBanner(false);
+              }, 3000);
               navigate('/');
           })
           .catch(error => {
-            console.log(error);
+            setShowBanner(true);
+            setMessage(error.response.data.message);
+            setType("error");
+            setTimeout(() => {
+              setShowBanner(false);
+            }, 3000);
           });
         })
       .catch(error => {

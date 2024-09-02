@@ -9,17 +9,24 @@ const Header = ({ setIsLoged, isLoged, isDisplayedLogin, setIsDisplayedLogin }) 
 	const navigate = useNavigate();
   const { basketContent } = useContext(BasketContext);
   const [isDisplayed, setIsDisplayed] = useState(false);
+  const [isDisplayedSmall, setIsDisplayedSmall] = useState(false);
   const [isDisplayedAccount, setIsDisplayedAccount] = useState(false);
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
 	const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
   const basketRef = useRef(null);
+  const basketRefSmall = useRef(null);
 
   useEffect(() => {
     login();
     
     function handleClickOutside(event) {
+      // Vérifiez si le clic se produit en dehors du panier
       if (basketRef.current && !basketRef.current.contains(event.target)) {
         setIsDisplayed(false);
+      }
+
+      if (basketRefSmall.current && !basketRefSmall.current.contains(event.target)) {
+        setIsDisplayedSmall(false);
       }
     }
 
@@ -41,8 +48,14 @@ const Header = ({ setIsLoged, isLoged, isDisplayedLogin, setIsDisplayedLogin }) 
     }
   }
 
-  function handleClick() {
+  function handleClick(event) {
+    event.stopPropagation(); // Empêche la propagation du clic
     setIsDisplayed(!isDisplayed);
+  }
+
+  function handleClickSmall(event) {
+    event.stopPropagation(); // Empêche la propagation du clic
+    setIsDisplayedSmall(!isDisplayedSmall);
   }
 
   function handleClickLogin() {
@@ -54,9 +67,9 @@ const Header = ({ setIsLoged, isLoged, isDisplayedLogin, setIsDisplayedLogin }) 
   }
 
   function handleClickUnlog() {
-    localStorage.removeItem("user_id")
-    setIsDisplayedAccount(false)
-    login()
+    localStorage.removeItem("user_id");
+    setIsDisplayedAccount(false);
+    login();
 		navigate(`/`);
   }
 
@@ -118,7 +131,7 @@ const Header = ({ setIsLoged, isLoged, isDisplayedLogin, setIsDisplayedLogin }) 
 					) : (
 						<a className="link large-screen" onClick={handleClickLogin}>Se connecter</a>
 					)}
-					<div className="BasketContainer  large-screen" ref={basketRef}>
+					<div className="BasketContainer large-screen" ref={basketRef}>
 						<img className="icon" onClick={handleClick} src="/assets/backet.png" alt='icon_panier'></img>
 						<span className="basket-quantity">{totalQuantity}</span>
 						<div style={{visibility: isDisplayed ? "visible" : "hidden"}}><Basket close={handleClick}/></div>
@@ -128,10 +141,10 @@ const Header = ({ setIsLoged, isLoged, isDisplayedLogin, setIsDisplayedLogin }) 
 						<Login close={handleClickLogin} login={login}/>
 					</div>
         </nav>
-        <div className="BasketContainer small-screen" ref={basketRef}>
-						<img className="icon" onClick={handleClick} src="/assets/backet.png" alt='icon_panier'></img>
+        <div className="BasketContainer small-screen" ref={basketRefSmall}>
+						<img className="icon" onClick={handleClickSmall} src="/assets/backet.png" alt='icon_panier'></img>
 						<span className="basket-quantity">{totalQuantity}</span>
-						<div style={{visibility: isDisplayed ? "visible" : "hidden"}}><Basket close={handleClick}/></div>
+						<div style={{visibility: isDisplayedSmall ? "visible" : "hidden"}}><Basket close={handleClickSmall}/></div>
 					</div>
         <div className={`burger-menu ${isBurgerOpen ? "open" : ""}`} onClick={toggleBurgerMenu}>
           <div></div>
