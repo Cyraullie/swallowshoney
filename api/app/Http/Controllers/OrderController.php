@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\OrdersHasProduct;
+use App\Models\GiftCard;
 
 class OrderController extends Controller
 {
@@ -41,11 +42,25 @@ class OrderController extends Controller
             $order->save();
 
             foreach ($basketContent as $product) {
+                $item = Product::find($product["id"]);
                 $orderHasProduct = new OrdersHasProduct();
                 $orderHasProduct->products_id = $product["id"];
                 $orderHasProduct->orders_id = $order["id"];
                 $orderHasProduct->quantity = $product["quantity"];
                 $orderHasProduct->save();
+                
+                if ($item->group_products_id == 4)
+                {
+                    $giftCard = new GiftCard();
+                    $bytes = random_bytes(16);
+                    $code = substr(bin2hex($bytes), 0, 16);
+                    $giftCard->code = $code;
+                    $giftCard->max_value = $item->price;
+                    $giftCard->value = $item->price;
+                    $giftCard->orders_has_products_id = $orderHasProduct->id;
+                    $giftCard->save();
+
+                }
             }
 
             return response("Ok", 200);
